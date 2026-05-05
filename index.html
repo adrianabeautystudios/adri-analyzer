@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Análisis de Piel · Adriana Beauty Studios</title>
+  <meta name="description" content="Análisis facial personalizado con IA. Rutinas, productos y guías de skincare por Adri." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET & TOKENS ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #ECEAE6;
+      --surf:   #F5F3EF;
+      --black:  #1C1713;
+      --gold:   #B8975A;
+      --mid:    #6B5B48;
+      --light:  #9A8870;
+      --bord:   #D8D0C4;
+      --white:  #FDFCFA;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── LAYOUT ── */
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--bg);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--bord);
+      padding: 0 20px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      color: var(--black);
+      letter-spacing: 0.01em;
+    }
+    .brand .dot { color: var(--gold); }
+
+    .btn-reserve {
+      background: var(--black);
+      color: var(--surf);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-reserve:hover { background: #3A2E24; }
+
+    /* ── PILL MENU ── */
+    #pill-bar {
+      display: flex;
+      gap: 8px;
+      padding: 10px 18px;
+      overflow-x: auto;
+      background: var(--bg);
+      border-bottom: 1px solid var(--bord);
+      flex-shrink: 0;
+      scrollbar-width: none;
+    }
+    #pill-bar::-webkit-scrollbar { display: none; }
+
+    .pill {
+      flex-shrink: 0;
+      background: transparent;
+      border: 1px solid var(--bord);
+      border-radius: 2px;
+      padding: 7px 14px;
+      font-size: 11px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--mid);
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .pill:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(184,151,90,0.06);
+    }
+
+    /* ── CHAT ── */
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ── WELCOME ── */
+    #welcome {
+      text-align: center;
+      padding: 44px 20px 28px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .w-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .w-line { display: inline-block; width: 36px; height: 1px; background: var(--gold); }
+    .w-label-txt {
+      font-size: 9.5px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .w-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 400;
+      color: var(--black);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .w-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 20px;
+      line-height: 1.25;
+    }
+    .w-text {
+      font-size: 14.5px;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+    .w-banner {
+      background: var(--black);
+      color: var(--surf);
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 14px 20px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .w-banner .star { color: var(--gold); }
+
+    /* ── MESSAGE ROW ── */
+    .msg-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      animation: fadeUp 0.25s ease;
+    }
+    .msg-row.user { justify-content: flex-end; }
+    .msg-row.adri { justify-content: flex-start; }
+
+    .avatar {
+      width: 32px; height: 32px;
+      background: var(--black);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--surf);
+      flex-shrink: 0;
+    }
+
+    .bubble-user {
+      background: var(--black);
+      color: var(--surf);
+      border-radius: 14px 14px 4px 14px;
+      padding: 11px 16px;
+      max-width: 72%;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .bubble-adri {
+      background: var(--white);
+      border: 1px solid var(--bord);
+      border-radius: 14px 14px 14px 4px;
+      padding: 16px 18px;
+      max-width: 82%;
+      font-size: 13.5px;
+      line-height: 1.82;
+      color: var(--black);
+      box-shadow: 0 2px 10px rgba(80,60,30,0.07);
+    }
+
+    .bubble-adri h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--black);
+      margin: 12px 0 5px;
+      letter-spacing: 0.03em;
+    }
+    .bubble-adri h3 {
+      font-size: 12.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin: 10px 0 4px;
+    }
+    .bubble-adri h4 {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--mid);
+      margin: 7px 0 3px;
+    }
+    .bubble-adri ul { padding-left: 16px; margin: 5px 0 7px; }
+    .bubble-adri li { margin-bottom: 5px; color: var(--mid); line-height: 1.65; }
+    .bubble-adri strong { color: var(--black); font-weight: 600; }
+    .bubble-adri em { color: var(--gold); font-style: italic; }
+
+    .msg-img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* ── TYPING ── */
+    .typing {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 0;
+    }
+    .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 1.4s infinite ease-in-out;
+    }
+    .dot:nth-child(2) { animation-delay: 0.22s; }
+    .dot:nth-child(3) { animation-delay: 0.44s; }
+    .typing-txt {
+      margin-left: 8px;
+      font-size: 12px;
+      color: var(--light);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── PRODUCT CARDS ── */
+    .cards-block { margin-left: 42px; margin-top: 12px; }
+    .cards-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 9.5px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .cards-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .cards-scroll::-webkit-scrollbar { display: none; }
+
+    .prod-card {
+      flex-shrink: 0;
+      width: 160px;
+      background: var(--white);
+      border: 1px solid var(--bord);
+      border-radius: 4px;
+      padding: 14px 13px 12px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      transition: all 0.2s;
+      box-shadow: 0 1px 4px rgba(80,60,30,0.05);
+    }
+    .prod-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(80,60,30,0.1);
+    }
+    .card-star { font-size: 11px; color: var(--gold); }
+    .card-name {
+      font-size: 12px;
+      color: var(--black);
+      line-height: 1.4;
+      font-weight: 600;
+    }
+    .card-reason {
+      font-size: 11.5px;
+      color: var(--light);
+      line-height: 1.45;
+      flex: 1;
+    }
+    .card-cta {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* ── WHATSAPP CTA ── */
+    .wa-wrap { margin-left: 42px; margin-top: 12px; margin-bottom: 4px; }
+    .wa-cta {
+      display: inline-block;
+      background: var(--black);
+      color: var(--surf);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .wa-cta:hover { background: #3A2E24; }
+    .wa-note {
+      font-size: 11px;
+      color: var(--light);
+      margin-top: 7px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER / INPUT ── */
+    footer {
+      padding: 11px 16px 15px;
+      background: var(--bg);
+      border-top: 1px solid var(--bord);
+      flex-shrink: 0;
+    }
+
+    .preview-row { margin-bottom: 9px; }
+    .preview-wrap { position: relative; display: inline-block; }
+    .preview-img {
+      width: 52px; height: 52px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+      border: 1px solid var(--bord);
+    }
+    .preview-x {
+      position: absolute; top: -5px; right: -5px;
+      background: var(--black); color: var(--surf);
+      border: none; border-radius: 50%;
+      width: 16px; height: 16px;
+      font-size: 8px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .preview-lbl {
+      font-size: 9px; color: var(--gold);
+      text-align: center; margin-top: 3px;
+      letter-spacing: 0.06em;
+    }
+
+    .input-box {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      background: var(--white);
+      border: 1.5px solid var(--bord);
+      border-radius: 4px;
+      padding: 9px 9px 9px 14px;
+      transition: border-color 0.2s;
+    }
+    .input-box.drag { border-color: var(--gold); background: #FEF8EE; }
+
+    .photo-btn {
+      background: none; border: none;
+      font-size: 17px; cursor: pointer;
+      padding: 3px; opacity: 0.45;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+    .photo-btn:hover { opacity: 0.85; }
+
+    #msg-input {
+      flex: 1;
+      background: transparent;
+      border: none; outline: none;
+      resize: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--black);
+      line-height: 1.5;
+      max-height: 110px;
+      overflow-y: auto;
+    }
+    #msg-input::placeholder { color: #B0A090; }
+
+    #send-btn {
+      width: 34px; height: 34px;
+      background: var(--black);
+      color: var(--surf);
+      border: none; border-radius: 2px;
+      font-size: 15px; font-weight: bold;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    #send-btn:hover:not(:disabled) { transform: scale(1.07); opacity: 0.88; }
+    #send-btn:disabled { opacity: 0.3; cursor: default; }
+
+    .disclaimer {
+      text-align: center;
+      font-size: 10px;
+      color: var(--light);
+      margin-top: 7px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%,80%,100% { transform: scale(0.55); opacity: 0.25; }
+      40%          { transform: scale(1);    opacity: 1; }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 3px; height: 3px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--bord); border-radius: 3px; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      Adriana<span class="dot">·</span>Beauty Studios
+    </div>
+    <a href="https://wa.me/17862538501?text=Hola%20Adriana!%20%F0%9F%91%8B%20Quiero%20agendar%20una%20consulta%20personalizada%20de%20skincare." target="_blank" class="btn-reserve">
+      Reservar Cita
+    </a>
+  </header>
+
+  <!-- PILL MENU -->
+  <div id="pill-bar">
+    <button class="pill" onclick="quickSend('Crea mi rutina completa de mañana (AM) paso a paso con guía de uso y productos recomendados.')">☀️ Rutina AM</button>
+    <button class="pill" onclick="quickSend('Crea mi rutina completa de noche (PM) paso a paso con guía de uso y productos recomendados.')">🌙 Rutina PM</button>
+    <button class="pill" onclick="quickSend('Dame una guía detallada de cómo usar productos de skincare: orden, cantidad y tiempos entre pasos.')">🧴 Guía de uso</button>
+    <button class="pill" onclick="quickSend('Explícame qué ingredientes activos puedo combinar y cuáles NO debo mezclar en mi rutina.')">🔬 Qué combinar</button>
+    <button class="pill" onclick="quickSend('Analiza mi tipo de piel y dame una rutina personalizada completa.')">✦ Analizar piel</button>
+  </div>
+
+  <!-- CHAT -->
+  <div id="chat">
+    <div id="welcome">
+      <div class="w-label">
+        <span class="w-line"></span>
+        <span class="w-label-txt">Tu diagnóstico personalizado</span>
+        <span class="w-line"></span>
+      </div>
+      <h1 class="w-title">Análisis de piel</h1>
+      <h2 class="w-sub">el glow que tu piel estaba esperando</h2>
+      <p class="w-text">
+        Todo lo que necesitas saber sobre tu piel. Sube una foto o cuéntame — te doy una rutina completa con los productos que uso, recomiendo y receto.
+      </p>
+      <div class="w-banner">
+        <span class="star">✦</span>
+        Escríbeme <strong>&nbsp;RUTINA&nbsp;</strong> — te digo exactamente qué usar según TU piel, gratis
+      </div>
+    </div>
+  </div>
+
+  <!-- INPUT -->
+  <footer>
+    <div id="preview-row" class="preview-row" style="display:none">
+      <div class="preview-wrap">
+        <img id="preview-img" class="preview-img" src="" alt="" />
+        <button class="preview-x" onclick="removeImage()">✕</button>
+        <div class="preview-lbl">Lista ✓</div>
+      </div>
+    </div>
+    <div class="input-box" id="input-box"
+      ondragover="event.preventDefault(); this.classList.add('drag')"
+      ondragleave="this.classList.remove('drag')"
+      ondrop="handleDrop(event)">
+      <button class="photo-btn" onclick="document.getElementById('file-input').click()">📸</button>
+      <input type="file" id="file-input" accept="image/*" style="display:none" onchange="handleFile(this.files[0])" />
+      <textarea id="msg-input" rows="1" placeholder="Describe tu piel o arrastra una foto aquí…"
+        oninput="autoResize(this)"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"
+      ></textarea>
+      <button id="send-btn" onclick="sendMessage()" disabled>↑</button>
+    </div>
+    <p class="disclaimer">Diagnóstico orientativo · No reemplaza a un dermatólogo</p>
+  </footer>
+
+</div>
+
+<script>
+  // ── CONFIG ──
+  // 👇 PEGA TU API KEY AQUÍ (reemplaza el texto entre las comillas)
+
+  const WA = "https://wa.me/17862538501?text=Hola%20Adriana!%20%F0%9F%91%8B%20Quiero%20agendar%20una%20consulta%20personalizada%20de%20skincare.";
+
+  const PRODUCTS = [
+    { name: "CeraVe Hydrating Cleanser", url: "https://amzn.to/4t6qMY7", category: "cleanser" },
+    { name: "La Roche-Posay Toleriane Hydrating Gentle Cleanser", url: "https://amzn.to/4tO0JWY", category: "cleanser" },
+    { name: "La Roche-Posay Effaclar Foaming Gel", url: "https://amzn.to/4vYBySV", category: "cleanser" },
+    { name: "Banila Co Clean It Zero Cleansing Balm", url: "https://amzn.to/3QElfui", category: "cleanser" },
+    { name: "Paula's Choice BHA 2% Liquid", url: "https://amzn.to/424qbLr", category: "exfoliant" },
+    { name: "COSRX AHA BHA Toner", url: "https://amzn.to/4w4lmzC", category: "toner" },
+    { name: "d'alba First Spray Serum", url: "https://amzn.to/4w1bzu1", category: "serum" },
+    { name: "COSRX Snail Mucin 96% Power Repairing Essence", url: "https://amzn.to/4n4G0eY", category: "serum" },
+    { name: "TruSkin Vitamin C Serum", url: "https://amzn.to/3R8hqO2", category: "serum" },
+    { name: "AXIS-Y Dark Spot Correcting Glow Serum", url: "https://amzn.to/4tR046X", category: "serum" },
+    { name: "Dr. Jart+ Cicapair Tiger Grass Serum", url: "https://amzn.to/4cY4DFq", category: "serum" },
+    { name: "SkinCeuticals CE Ferulic", url: "https://amzn.to/4cTUoBX", category: "serum" },
+    { name: "CeraVe Retinol Serum", url: "https://amzn.to/4eR9wT9", category: "retinol" },
+    { name: "Paula's Choice Retinol 1%", url: "https://amzn.to/4t9HGVR", category: "retinol" },
+    { name: "Neutrogena Hydro Boost Gel", url: "https://amzn.to/4cW0Wjm", category: "moisturizer" },
+    { name: "CeraVe PM Moisturizing Lotion", url: "https://amzn.to/48rVDqK", category: "moisturizer" },
+    { name: "Tatcha The Water Cream", url: "https://amzn.to/3QPUovh", category: "moisturizer" },
+    { name: "Kiehl's Ultra Facial Cream", url: "https://amzn.to/48xeWPh", category: "moisturizer" },
+    { name: "Olay Regenerist Cream", url: "https://amzn.to/4uh2knK", category: "moisturizer" },
+    { name: "Neutrogena Rapid Wrinkle Repair Cream", url: "https://amzn.to/49kAPl9", category: "antiaging" },
+    { name: "CeraVe Skin Renewing Night Cream", url: "https://amzn.to/3OXWJng", category: "night" },
+    { name: "La Roche-Posay Cicaplast Baume B5", url: "https://amzn.to/4t4BVZs", category: "treatment" },
+    { name: "Aquaphor Healing Ointment", url: "https://amzn.to/4cERO3R", category: "treatment" },
+    { name: "Laneige Lip Sleeping Mask", url: "https://amzn.to/4t8B1uW", category: "lips" },
+    { name: "Summer Fridays Lip Butter Balm", url: "https://amzn.to/4w6Pzhx", category: "lips" },
+    { name: "Producto especial Adri", url: "https://amzn.to/4u9Sl3u", category: "special" },
+  ];
+
+  const SYSTEM = `Eres Adri, la asesora experta en skincare de Adriana Beauty Studios — esthétician certificada con más de 10 años en Miami. Tu lema: no vendes productos, transformas pieles. Tono: sofisticado, empoderador, cálido.
+
+CATÁLOGO DE ADRIANA — SIEMPRE recomienda estos productos primero:
+${JSON.stringify(PRODUCTS)}
+
+Al responder:
+1. ANÁLISIS — Tipo de piel, textura, hidratación, problemas visibles.
+2. DIAGNÓSTICO — Honesto, empático y motivador.
+3. RUTINA AM ☀️ y PM 🌙 — Pasos en orden exacto.
+4. GUÍA DE USO — Cantidad, técnica, momento y espera entre pasos.
+5. INGREDIENTES — Qué mezclar y qué NO.
+6. PRODUCTOS — Siempre del catálogo. Al final incluye EXACTAMENTE:
+
+PRODUCT_CARDS:[{"name":"nombre exacto","url":"url exacta","reason":"razón en 1 frase"}]
+
+Máximo 5 productos relevantes.
+
+7. Antes de PRODUCT_CARDS escribe siempre: "💆‍♀️ ¿Quieres resultados más profundos? Reserva tu facial clínico personalizado conmigo en Miami."
+
+Responde en español. Elegante y concisa.`;
+
+  // ── STATE ──
+  let history = [];
+  let currentImage = null;
+
+  // ── IMAGE ──
+  function handleFile(file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      currentImage = { data: e.target.result.split(',')[1], type: file.type, src: e.target.result };
+      document.getElementById('preview-img').src = e.target.result;
+      document.getElementById('preview-row').style.display = 'block';
+      updateSendBtn();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    document.getElementById('input-box').classList.remove('drag');
+    handleFile(e.dataTransfer.files[0]);
+  }
+
+  function removeImage() {
+    currentImage = null;
+    document.getElementById('preview-row').style.display = 'none';
+    document.getElementById('file-input').value = '';
+    updateSendBtn();
+  }
+
+  function updateSendBtn() {
+    const val = document.getElementById('msg-input').value.trim();
+    document.getElementById('send-btn').disabled = !val && !currentImage;
+  }
+
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 110) + 'px';
+    updateSendBtn();
+  }
+
+  // ── QUICK SEND ──
+  function quickSend(text) {
+    document.getElementById('msg-input').value = text;
+    updateSendBtn();
+    sendMessage();
+  }
+
+  // ── SEND ──
+  async function sendMessage() {
+    const input = document.getElementById('msg-input');
+    const text = input.value.trim();
+    if (!text && !currentImage) return;
+
+    // Hide welcome
+    const w = document.getElementById('welcome');
+    if (w) w.remove();
+
+    // Add user bubble
+    const imgForBubble = currentImage ? { ...currentImage } : null;
+    appendUserBubble(text, imgForBubble);
+
+    // Build API message
+    const userContent = currentImage
+      ? [{ type: 'image', source: { type: 'base64', media_type: currentImage.type, data: currentImage.data } }, { type: 'text', text: text || 'Analiza mi piel.' }]
+      : text;
+
+    history.push({ role: 'user', content: userContent });
+
+    // Reset
+    input.value = '';
+    input.style.height = 'auto';
+    removeImage();
+    document.getElementById('send-btn').disabled = true;
+
+    // Typing indicator
+    const typingId = appendTyping();
+    scrollBottom();
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: SYSTEM,
+          messages: history,
+        }),
+      });
+      const data = await res.json();
+      const raw = data.content?.map(b => b.text || '').join('') || 'No pude completar el análisis. Intenta de nuevo.';
+
+      // Parse cards
+      const match = raw.match(/PRODUCT_CARDS:(\[[\s\S]*?\])/);
+      let cards = [];
+      let bodyText = raw;
+      if (match) {
+        try { cards = JSON.parse(match[1]); } catch {}
+        bodyText = raw.replace(/PRODUCT_CARDS:\[[\s\S]*?\]/, '').trim();
+      }
+
+      history.push({ role: 'assistant', content: bodyText });
+
+      removeTyping(typingId);
+      appendAdriBubble(bodyText, cards);
+    } catch (err) {
+      removeTyping(typingId);
+      appendAdriBubble('Error de conexión. Por favor intenta de nuevo.', []);
+    }
+    scrollBottom();
+  }
+
+  // ── DOM HELPERS ──
+  function appendUserBubble(text, img) {
+    const chat = document.getElementById('chat');
+    const row = document.createElement('div');
+    row.className = 'msg-row user';
+    let html = '';
+    if (img) html += `<img src="${img.src}" class="msg-img" style="max-width:200px;border-radius:8px;margin-bottom:6px;display:block;" />`;
+    if (text) html += `<span>${escHtml(text)}</span>`;
+    row.innerHTML = `<div class="bubble-user">${html}</div>`;
+    chat.appendChild(row);
+  }
+
+  function appendAdriBubble(text, cards) {
+    const chat = document.getElementById('chat');
+
+    // Main bubble
+    const row = document.createElement('div');
+    row.className = 'msg-row adri';
+    row.innerHTML = `<div class="avatar">A</div><div class="bubble-adri">${formatText(text)}</div>`;
+    chat.appendChild(row);
+
+    // Product cards
+    if (cards.length > 0) {
+      const block = document.createElement('div');
+      block.className = 'cards-block';
+      block.innerHTML = `
+        <div class="cards-label"><span class="w-line"></span> Sets &amp; Productos Recomendados</div>
+        <div class="cards-scroll">
+          ${cards.map(c => `
+            <a href="${c.url}" target="_blank" rel="noreferrer" class="prod-card">
+              <div class="card-star">✦</div>
+              <div class="card-name">${escHtml(c.name)}</div>
+              <p class="card-reason">${escHtml(c.reason)}</p>
+              <div class="card-cta">Ver en Amazon →</div>
+            </a>
+          `).join('')}
+        </div>`;
+      chat.appendChild(block);
+    }
+
+    // WhatsApp CTA
+    const waDiv = document.createElement('div');
+    waDiv.className = 'wa-wrap';
+    waDiv.innerHTML = `
+      <a href="${WA}" target="_blank" class="wa-cta">Reservar Mi Cita →</a>
+      <p class="wa-note">Miami · Facial clínico personalizado</p>`;
+    chat.appendChild(waDiv);
+  }
+
+  function appendTyping() {
+    const chat = document.getElementById('chat');
+    const id = 'typing-' + Date.now();
+    const row = document.createElement('div');
+    row.className = 'msg-row adri';
+    row.id = id;
+    row.innerHTML = `<div class="avatar">A</div><div class="bubble-adri"><div class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="typing-txt">Analizando tu piel...</span></div></div>`;
+    chat.appendChild(row);
+    return id;
+  }
+
+  function removeTyping(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  function scrollBottom() {
+    setTimeout(() => {
+      const chat = document.getElementById('chat');
+      chat.scrollTop = chat.scrollHeight;
+    }, 80);
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function formatText(text) {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/^### (.*?)$/gm, '<h4>$1</h4>')
+      .replace(/^## (.*?)$/gm, '<h3>$1</h3>')
+      .replace(/^# (.*?)$/gm, '<h2>$1</h2>')
+      .replace(/^[-•] (.*?)$/gm, '<li>$1</li>')
+      .replace(/(<li>[\s\S]*?<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
+      .replace(/\n\n/g, '<br/><br/>')
+      .replace(/\n/g, '<br/>');
+  }
+</script>
+</body>
+</html>
