@@ -475,11 +475,11 @@ async function sendChat(){
   try{
     const raw=await api(chatHist);
     const{text,cards,rutina}=parseAll(raw);
-    if(rutina){saveRutina(rutina);toast('✦ Rutina guardada');}
+    if(rutina){saveRutina(rutina);}
     chatHist.push({role:'assistant',content:text});
     save('chat',chatHist.slice(-20));
-    removeTyping(tid);addAdriBubble(text,cards);
-  }catch(e){removeTyping(tid);addAdriBubble('Error de conexión. Por favor intenta de nuevo.',[]);}
+    removeTyping(tid);addAdriBubble(text,cards,rutina);
+  }catch(e){removeTyping(tid);addAdriBubble('Error de conexión. Por favor intenta de nuevo.',[],null);}
   scrollBot();
 }
 
@@ -497,11 +497,11 @@ async function analyzeSelfie(){
   try{
     const raw=await api(chatHist);
     const{text,cards,rutina}=parseAll(raw);
-    if(rutina){saveRutina(rutina);toast('✦ Rutina guardada');}
+    if(rutina){saveRutina(rutina);}
     chatHist.push({role:'assistant',content:text});
     save('chat',chatHist.slice(-20));
-    removeTyping(tid);addAdriBubble(text,cards);
-  }catch(e){removeTyping(tid);addAdriBubble('Error de conexión.',[]);}
+    removeTyping(tid);addAdriBubble(text,cards,rutina);
+  }catch(e){removeTyping(tid);addAdriBubble('Error de conexión.',[],null);}
   scrollBot();
 }
 
@@ -596,15 +596,52 @@ function addUserBubble(text,img){
   c.appendChild(row);
 }
 
-function addAdriBubble(text,cards){
+function addAdriBubble(text,cards,rutina){
   const c=document.getElementById('chat-msgs');
   const row=document.createElement('div');row.className='msg-row';
   row.innerHTML=`<div class="av">A</div><div class="b-adri">${fmt(text)}</div>`;
   c.appendChild(row);
   if(cards.length){const b=document.createElement('div');b.innerHTML=renderCards(cards,'39px');c.appendChild(b);}
+
+  // If rutina was generated, show save + WA share buttons
+  if(rutina){
+    const rb=document.createElement('div');
+    rb.className='rutina-actions';
+    rb.style.cssText='margin-left:39px;margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;';
+    rb.innerHTML=`
+      <button class="btn-p" style="font-size:10px;padding:9px 16px" onclick="saveRutinaManual(this)">
+        <svg style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline;vertical-align:middle;margin-right:5px" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Guardar rutina
+      </button>
+      <button class="btn-o" style="font-size:10px;padding:9px 16px" onclick="shareRutinaWA(this)">
+        <svg style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline;vertical-align:middle;margin-right:5px" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+        Enviar por WhatsApp
+      </button>`;
+    rb.dataset.rutina=rutina;
+    c.appendChild(rb);
+  }
+
   const wa=document.createElement('div');wa.className='wa-wrap';
   wa.innerHTML=`<a href="${WA}" target="_blank" class="wa-cta">Reservar Mi Cita →</a><p class="wa-note">Miami · Facial clínico personalizado</p>`;
   c.appendChild(wa);
+}
+
+function saveRutinaManual(btn){
+  const rutina=btn.closest('.rutina-actions').dataset.rutina;
+  if(!rutina)return;
+  saveRutina(rutina);
+  btn.textContent='✦ Guardada';
+  btn.disabled=true;
+  btn.style.opacity='0.6';
+  toast('✦ Rutina guardada en Mi Rutina');
+}
+
+function shareRutinaWA(btn){
+  const rutina=btn.closest('.rutina-actions').dataset.rutina;
+  if(!rutina)return;
+  const clean=rutina.replace(/<[^>]*>/g,'').substring(0,1500);
+  const msg=encodeURIComponent(`✦ Mi rutina personalizada por Adri · Adriana Beauty Studios\n\n${clean}\n\n─\nAdri · adrianabeautystudios.netlify.app`);
+  window.open(`https://wa.me/?text=${msg}`,'_blank');
 }
 
 function addTyping(){
