@@ -1,216 +1,171 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Adri · por Adriana Beauty Studios</title>
-  <meta name="description" content="Tu asesora personal de skincare. Análisis facial, rutinas y productos recomendados."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --bg:#ECEAE6;--surf:#F5F3EF;--white:#FDFCFA;
-      --black:#1C1713;--gold:#B8975A;--gold2:#D4B07A;
-      --mid:#6B5B48;--light:#9A8870;--bord:#D8D0C4;--bord2:#EAE4DC;
-    }
-    html,body{height:100%;background:var(--bg);color:var(--black);font-family:'DM Sans',sans-serif;}
-
-    /* TOAST */
-    #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--black);color:var(--surf);font-size:12px;letter-spacing:0.06em;padding:12px 24px;border-radius:2px;opacity:0;transition:all 0.35s;z-index:999;white-space:nowrap;pointer-events:none;}
-    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
-    /* ONBOARDING */
-    #onboarding{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100;padding:24px;animation:fadeIn 0.6s ease;}
-    .ob-card{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:52px 44px;max-width:400px;width:100%;text-align:center;box-shadow:0 8px 48px rgba(80,60,30,0.09);animation:slideUp 0.6s ease;}
-    .ob-mono{width:56px;height:56px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;color:var(--surf);}
-    .ob-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:4px;letter-spacing:0.02em;}
-    .ob-sub{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--gold);margin-bottom:22px;}
-    .ob-text{font-size:13.5px;color:var(--mid);line-height:1.78;margin-bottom:28px;}
-    .ob-input{width:100%;background:var(--bg);border:1.5px solid var(--bord);border-radius:2px;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--black);outline:none;margin-bottom:13px;transition:border-color 0.2s;text-align:center;}
-    .ob-input:focus{border-color:var(--gold);}
-    .ob-input::placeholder{color:var(--light);}
-    .ob-btn{width:100%;background:var(--black);color:var(--surf);border:none;border-radius:2px;padding:14px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
-    .ob-btn:hover{background:#3A2E24;}
-
-    /* APP */
-    #app{display:flex;flex-direction:column;height:100dvh;max-width:720px;margin:0 auto;background:var(--bg);}
-
-    /* HEADER */
-    header{background:var(--bg);border-bottom:1px solid var(--bord);padding:0 18px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;flex-shrink:0;}
-    .brand{display:flex;align-items:center;gap:10px;}
-    .brand-mono{width:34px;height:34px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--surf);flex-shrink:0;}
-    .brand-text{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--black);letter-spacing:0.01em;}
-    .brand-text .dot{color:var(--gold);}
-    .header-right{display:flex;align-items:center;gap:10px;}
-    #greeting{font-size:11px;color:var(--light);letter-spacing:0.06em;}
-    .btn-res{background:var(--black);color:var(--surf);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:9px 14px;border-radius:2px;text-decoration:none;transition:background 0.2s;white-space:nowrap;}
-    .btn-res:hover{background:#3A2E24;}
-
-    /* SVG ICONS (inline, gold stroke) */
-    .ico{display:block;width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-
-    /* NAV */
-    #nav{display:flex;background:var(--bg);border-bottom:1px solid var(--bord);overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
-    #nav::-webkit-scrollbar{display:none;}
-    .nav-btn{flex-shrink:0;background:transparent;border:none;border-bottom:2px solid transparent;padding:10px 14px;font-size:9.5px;font-family:'DM Sans',sans-serif;color:var(--light);cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:5px;}
-    .nav-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.2s;}
-    .nav-btn:hover{color:var(--mid);}
-    .nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
-
-    /* SCREENS */
-    .screen{display:none;flex:1;overflow-y:auto;flex-direction:column;}
-    .screen.active{display:flex;animation:fadeIn 0.25s ease;}
-    .screen-inner{padding:24px 18px;max-width:600px;margin:0 auto;width:100%;}
-
-    /* SECTION HEADERS */
-    .sec-lbl{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-    .gline{display:inline-block;width:28px;height:1px;background:var(--gold);}
-    .sec-tag{font-size:9.5px;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase;}
-    .sec-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:4px;}
-    .sec-sub{font-size:12px;color:var(--light);letter-spacing:0.04em;margin-bottom:20px;}
-
-    /* CHAT */
-    #chat-msgs{flex:1;overflow-y:auto;padding:22px 16px;display:flex;flex-direction:column;gap:14px;}
-    .welcome-block{text-align:center;padding:40px 18px 24px;}
-    .w-lbl{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;}
-    .w-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;margin-bottom:4px;}
-    .w-sub{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;color:var(--gold);margin-bottom:16px;}
-    .w-text{font-size:14px;color:var(--mid);line-height:1.8;margin-bottom:18px;}
-    .w-banner{background:var(--black);color:var(--surf);font-size:12.5px;padding:14px 18px;border-radius:2px;display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap;}
-    .star{color:var(--gold);}
-
-    .msg-row{display:flex;align-items:flex-end;gap:9px;animation:fadeUp 0.25s ease;}
-    .msg-row.user{justify-content:flex-end;}
-    .av{width:30px;height:30px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--surf);flex-shrink:0;}
-    .b-user{background:var(--black);color:var(--surf);border-radius:14px 14px 4px 14px;padding:11px 15px;max-width:72%;font-size:14px;line-height:1.6;}
-    .b-adri{background:var(--white);border:1px solid var(--bord);border-radius:14px 14px 14px 4px;padding:15px 17px;max-width:82%;font-size:13.5px;line-height:1.82;box-shadow:0 2px 8px rgba(80,60,30,0.06);}
-    .b-adri h2{font-family:'Cormorant Garamond',serif;font-size:16px;margin:10px 0 4px;}
-    .b-adri h3{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin:10px 0 4px;}
-    .b-adri h4{font-size:12px;font-weight:500;color:var(--mid);margin:7px 0 3px;}
-    .b-adri ul{padding-left:15px;margin:4px 0 6px;}
-    .b-adri li{margin-bottom:4px;color:var(--mid);line-height:1.65;}
-    .b-adri strong{color:var(--black);font-weight:600;}
-    .b-adri em{color:var(--gold);font-style:italic;}
-    .msg-img{max-width:100%;border-radius:8px;margin-bottom:8px;display:block;}
-
-    .typing{display:flex;align-items:center;gap:4px;padding:3px 0;}
-    .dot{display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 1.4s infinite ease-in-out;}
-    .dot:nth-child(2){animation-delay:.22s}.dot:nth-child(3){animation-delay:.44s}
-    .typing-txt{margin-left:8px;font-size:12px;color:var(--light);}
-
-    /* CARDS */
-    .cards-block{margin-left:39px;margin-top:10px;}
-    .cards-lbl{display:flex;align-items:center;gap:8px;font-size:9.5px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
-    .cards-row{display:flex;gap:9px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
-    .cards-row::-webkit-scrollbar{display:none;}
-    .pc{flex-shrink:0;width:155px;background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:13px 12px 11px;text-decoration:none;display:flex;flex-direction:column;gap:6px;transition:all 0.2s;}
-    .pc:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 16px rgba(80,60,30,0.1);}
-    .pc-star{font-size:11px;color:var(--gold);}
-    .pc-name{font-size:11.5px;color:var(--black);line-height:1.4;font-weight:600;}
-    .pc-reason{font-size:11px;color:var(--light);line-height:1.4;flex:1;}
-    .pc-cta{font-size:10.5px;color:var(--gold);letter-spacing:0.06em;font-weight:500;}
-
-    /* WA CTA */
-    .wa-wrap{margin-left:39px;margin-top:10px;margin-bottom:4px;}
-    .wa-cta{display:inline-block;background:var(--black);color:var(--surf);font-size:10.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:11px 22px;border-radius:2px;text-decoration:none;transition:background 0.2s;}
-    .wa-cta:hover{background:#3A2E24;}
-    .wa-note{font-size:10.5px;color:var(--light);margin-top:6px;}
-
-    /* FOOTER INPUT */
-    .chat-foot{padding:10px 14px 14px;background:var(--bg);border-top:1px solid var(--bord);flex-shrink:0;}
-    .prev-row{margin-bottom:8px;}
-    .prev-wrap{position:relative;display:inline-block;}
-    .prev-img{width:50px;height:50px;object-fit:cover;border-radius:6px;display:block;border:1px solid var(--bord);}
-    .prev-x{position:absolute;top:-5px;right:-5px;background:var(--black);color:var(--surf);border:none;border-radius:50%;width:16px;height:16px;font-size:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-    .prev-lbl{font-size:9px;color:var(--gold);text-align:center;margin-top:2px;letter-spacing:0.06em;}
-    .ibox{display:flex;align-items:flex-end;gap:8px;background:var(--white);border:1.5px solid var(--bord);border-radius:4px;padding:8px 8px 8px 13px;transition:border-color 0.2s;}
-    .ibox.drag{border-color:var(--gold);}
-    .photo-btn{background:none;border:none;cursor:pointer;padding:4px;opacity:0.4;flex-shrink:0;transition:opacity 0.2s;color:var(--mid);display:flex;align-items:center;}
-    .photo-btn:hover{opacity:0.85;}
-    #msg-in{flex:1;background:transparent;border:none;outline:none;resize:none;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--black);line-height:1.5;max-height:100px;overflow-y:auto;}
-    #msg-in::placeholder{color:#B8A898;}
-    .send-btn{width:33px;height:33px;background:var(--black);color:var(--surf);border:none;border-radius:2px;font-size:14px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.2s,transform 0.15s;}
-    .send-btn:hover:not(:disabled){transform:scale(1.07);}
-    .send-btn:disabled{opacity:0.3;cursor:default;}
-    .disc{text-align:center;font-size:10px;color:var(--light);margin-top:6px;}
-
-    /* SCAN / SELFIE */
-    .scan-zone{border:1.5px dashed var(--bord);border-radius:4px;padding:36px 20px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:16px;display:flex;flex-direction:column;align-items:center;gap:12px;}
-    .scan-zone:hover,.scan-zone.drag{border-color:var(--gold);background:rgba(184,151,90,0.04);}
-    .scan-zone svg{width:36px;height:36px;stroke:var(--bord);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.2s;}
-    .scan-zone:hover svg,.scan-zone.drag svg{stroke:var(--gold);}
-    .scan-text{font-size:14px;color:var(--mid);line-height:1.7;}
-    .scan-hint{font-size:11px;color:var(--light);}
-    .scan-prev{border-radius:8px;max-width:100%;display:block;margin:0 auto 16px;max-height:220px;object-fit:contain;}
-    .scan-result{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:18px;font-size:13.5px;line-height:1.8;}
-
-    /* COMPATIBILITY BAR */
-    .compat-bar{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:18px;margin-bottom:12px;}
-    .compat-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--light);margin-bottom:8px;}
-    .compat-pct{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--black);margin-bottom:8px;}
-    .compat-pct span{font-size:16px;color:var(--gold);}
-    .bar-track{height:4px;background:var(--bord2);border-radius:2px;overflow:hidden;}
-    .bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;transition:width 1s ease;}
-    .compat-status{font-size:12px;color:var(--mid);margin-top:8px;}
-
-    /* RUTINA */
-    .rut-card{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:18px;margin-bottom:10px;}
-    .rut-card-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;margin-bottom:3px;}
-    .rut-card-date{font-size:11px;color:var(--light);margin-bottom:10px;}
-    .rut-card-preview{font-size:13px;color:var(--mid);line-height:1.7;}
-    .rut-card-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
-    .rut-content{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:22px;margin-bottom:14px;font-size:13.5px;line-height:1.82;}
-    .rut-content h3{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin:12px 0 5px;}
-    .rut-content h3:first-child{margin-top:0;}
-    .rut-content ul{padding-left:15px;margin:4px 0 8px;}
-    .rut-content li{margin-bottom:4px;color:var(--mid);line-height:1.65;}
-    .rut-content strong{color:var(--black);}
-
-    /* EMPTY STATE */
-    .empty{text-align:center;padding:56px 20px;}
-    .empty svg{width:40px;height:40px;stroke:var(--bord);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 16px;display:block;}
-    .empty-text{font-size:14px;color:var(--light);line-height:1.7;margin-bottom:18px;}
-
-    /* BUTTONS */
-    .btn-p{display:inline-block;background:var(--black);color:var(--surf);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:11px 22px;border-radius:2px;border:none;cursor:pointer;text-decoration:none;transition:background 0.2s;}
-    .btn-p:hover{background:#3A2E24;}
-    .btn-o{display:inline-block;background:transparent;color:var(--black);font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px;border-radius:2px;border:1.5px solid var(--bord);cursor:pointer;text-decoration:none;transition:all 0.2s;}
-    .btn-o:hover{border-color:var(--gold);color:var(--gold);}
-
-    /* PRODUCTS */
-    .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;}
-    .pt{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:14px 13px;text-decoration:none;display:flex;flex-direction:column;gap:7px;transition:all 0.2s;}
-    .pt:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 5px 14px rgba(80,60,30,0.09);}
-    .pt-cat{font-size:9.5px;color:var(--gold);letter-spacing:0.14em;text-transform:uppercase;}
-    .pt-name{font-size:12px;color:var(--black);line-height:1.4;font-weight:500;flex:1;}
-    .pt-cta{font-size:10.5px;color:var(--gold);letter-spacing:0.06em;}
-
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    @keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes pulse{0%,80%,100%{transform:scale(0.55);opacity:0.25}40%{transform:scale(1);opacity:1}}
-    ::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bord);border-radius:3px}
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Adri · por Adriana Beauty Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#ECEAE6;--surf:#F5F3EF;--white:#FDFCFA;--black:#1C1713;--gold:#B8975A;--mid:#6B5B48;--light:#9A8870;--bord:#D8D0C4;--bord2:#EAE4DC;}
+html,body{height:100%;background:var(--bg);color:var(--black);font-family:'DM Sans',sans-serif;}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--black);color:var(--surf);font-size:11.5px;letter-spacing:0.06em;padding:12px 24px;border-radius:2px;opacity:0;transition:all 0.35s;z-index:999;white-space:nowrap;pointer-events:none;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+#onboarding{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100;padding:24px;animation:fadeIn 0.6s ease;}
+.ob-card{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:52px 44px;max-width:400px;width:100%;text-align:center;box-shadow:0 8px 48px rgba(80,60,30,0.09);animation:slideUp 0.6s ease;}
+.ob-mono{width:56px;height:56px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;color:var(--surf);}
+.ob-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:4px;}
+.ob-sub{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--gold);margin-bottom:22px;}
+.ob-text{font-size:13.5px;color:var(--mid);line-height:1.78;margin-bottom:28px;}
+.ob-input{width:100%;background:var(--bg);border:1.5px solid var(--bord);border-radius:2px;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--black);outline:none;margin-bottom:13px;transition:border-color 0.2s;text-align:center;}
+.ob-input:focus{border-color:var(--gold);}.ob-input::placeholder{color:var(--light);}
+.ob-btn{width:100%;background:var(--black);color:var(--surf);border:none;border-radius:2px;padding:14px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
+.ob-btn:hover{background:#3A2E24;}
+#app{display:flex;flex-direction:column;height:100dvh;max-width:720px;margin:0 auto;background:var(--bg);}
+.vat-strip{background:var(--black);color:var(--surf);text-align:center;padding:9px 18px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;flex-shrink:0;}
+.vat-strip span{color:var(--gold);}
+header{background:var(--bg);border-bottom:1px solid var(--bord);padding:0 18px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;flex-shrink:0;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-mono{width:32px;height:32px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--surf);flex-shrink:0;}
+.brand-text{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--black);}
+.brand-text .dot{color:var(--gold);}
+.header-right{display:flex;align-items:center;gap:10px;}
+#greeting{font-size:11px;color:var(--light);letter-spacing:0.06em;}
+.btn-res{background:var(--black);color:var(--surf);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:9px 14px;border-radius:2px;text-decoration:none;transition:background 0.2s;white-space:nowrap;}
+.btn-res:hover{background:#3A2E24;}
+#nav{display:flex;background:var(--bg);border-bottom:1px solid var(--bord);overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
+#nav::-webkit-scrollbar{display:none;}
+.nav-btn{flex-shrink:0;background:transparent;border:none;border-bottom:2px solid transparent;padding:10px 13px;font-size:9.5px;font-family:'DM Sans',sans-serif;color:var(--light);cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.nav-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.nav-btn:hover{color:var(--mid);}.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.screen{display:none;flex:1;overflow-y:auto;flex-direction:column;}
+.screen.active{display:flex;animation:fadeIn 0.25s ease;}
+.screen-inner{padding:24px 18px;max-width:600px;margin:0 auto;width:100%;}
+.sec-lbl{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.gline{display:inline-block;width:28px;height:1px;background:var(--gold);}
+.sec-tag{font-size:9.5px;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:4px;}
+.sec-sub{font-size:12px;color:var(--light);letter-spacing:0.04em;margin-bottom:20px;}
+#chat-msgs{flex:1;overflow-y:auto;padding:22px 16px;display:flex;flex-direction:column;gap:14px;}
+.welcome-block{text-align:center;padding:40px 18px 24px;}
+.w-lbl{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;}
+.w-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;margin-bottom:6px;}
+.w-sub{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;color:var(--gold);margin-bottom:16px;}
+.w-greeting{font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:22px;font-style:italic;}
+.w-btn{display:inline-block;background:var(--black);color:var(--surf);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:13px 28px;border-radius:2px;border:none;cursor:pointer;transition:background 0.2s;}
+.w-btn:hover{background:#3A2E24;}
+.msg-row{display:flex;align-items:flex-end;gap:9px;animation:fadeUp 0.25s ease;}
+.msg-row.user{justify-content:flex-end;}
+.av{width:30px;height:30px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--surf);flex-shrink:0;}
+.b-user{background:var(--black);color:var(--surf);border-radius:14px 14px 4px 14px;padding:11px 15px;max-width:72%;font-size:14px;line-height:1.6;}
+.b-adri{background:var(--white);border:1px solid var(--bord);border-radius:14px 14px 14px 4px;padding:15px 17px;max-width:82%;font-size:13.5px;line-height:1.82;box-shadow:0 2px 8px rgba(80,60,30,0.06);}
+.b-adri h2{font-family:'Cormorant Garamond',serif;font-size:16px;margin:10px 0 4px;}
+.b-adri h3{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin:10px 0 4px;}
+.b-adri h4{font-size:12px;font-weight:500;color:var(--mid);margin:7px 0 3px;}
+.b-adri ul{padding-left:15px;margin:4px 0 6px;}
+.b-adri li{margin-bottom:4px;color:var(--mid);line-height:1.65;}
+.b-adri strong{color:var(--black);font-weight:600;}.b-adri em{color:var(--gold);font-style:italic;}
+.msg-img{max-width:100%;border-radius:8px;margin-bottom:8px;display:block;}
+.typing{display:flex;align-items:center;gap:4px;padding:3px 0;}
+.dot{display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 1.4s infinite ease-in-out;}
+.dot:nth-child(2){animation-delay:.22s}.dot:nth-child(3){animation-delay:.44s}
+.typing-txt{margin-left:8px;font-size:12px;color:var(--light);}
+.cards-block{margin-left:39px;margin-top:10px;}
+.cards-lbl{display:flex;align-items:center;gap:8px;font-size:9.5px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+.cards-row{display:flex;gap:9px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
+.cards-row::-webkit-scrollbar{display:none;}
+.pc{flex-shrink:0;width:155px;background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:13px 12px 11px;text-decoration:none;display:flex;flex-direction:column;gap:6px;transition:all 0.2s;}
+.pc:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 16px rgba(80,60,30,0.1);}
+.pc-star{font-size:10px;color:var(--gold);}.pc-name{font-size:11.5px;color:var(--black);line-height:1.4;font-weight:600;}
+.pc-reason{font-size:11px;color:var(--light);line-height:1.4;flex:1;}.pc-cta{font-size:10.5px;color:var(--gold);letter-spacing:0.06em;font-weight:500;}
+.rutina-actions{margin-left:39px;margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;}
+.wa-wrap{margin-left:39px;margin-top:10px;margin-bottom:4px;}
+.wa-cta{display:inline-block;background:var(--black);color:var(--surf);font-size:10.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:11px 22px;border-radius:2px;text-decoration:none;transition:background 0.2s;}
+.wa-cta:hover{background:#3A2E24;}
+.wa-note{font-size:10.5px;color:var(--light);margin-top:6px;}
+.vat-tag{font-size:10px;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-top:16px;padding-top:14px;border-top:1px solid var(--bord2);text-align:center;}
+.feedback-card{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:20px;margin-left:39px;margin-top:12px;}
+.feedback-label{font-size:9.5px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+.feedback-question{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;color:var(--black);margin-bottom:14px;}
+.feedback-options{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.fb-opt{background:transparent;border:1px solid var(--bord);border-radius:2px;padding:8px 14px;font-size:11px;font-family:'DM Sans',sans-serif;color:var(--mid);cursor:pointer;letter-spacing:0.06em;transition:all 0.2s;}
+.fb-opt:hover,.fb-opt.selected{border-color:var(--gold);color:var(--gold);background:rgba(184,151,90,0.06);}
+.feedback-textarea{width:100%;background:var(--bg);border:1.5px solid var(--bord);border-radius:2px;padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--black);outline:none;resize:none;height:72px;transition:border-color 0.2s;margin-bottom:12px;}
+.feedback-textarea:focus{border-color:var(--gold);}.feedback-textarea::placeholder{color:var(--light);}
+.chat-foot{padding:10px 14px 14px;background:var(--bg);border-top:1px solid var(--bord);flex-shrink:0;}
+.prev-row{margin-bottom:8px;}.prev-wrap{position:relative;display:inline-block;}
+.prev-img{width:50px;height:50px;object-fit:cover;border-radius:6px;display:block;border:1px solid var(--bord);}
+.prev-x{position:absolute;top:-5px;right:-5px;background:var(--black);color:var(--surf);border:none;border-radius:50%;width:16px;height:16px;font-size:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.prev-lbl{font-size:9px;color:var(--gold);text-align:center;margin-top:2px;letter-spacing:0.06em;}
+.ibox{display:flex;align-items:flex-end;gap:8px;background:var(--white);border:1.5px solid var(--bord);border-radius:4px;padding:8px 8px 8px 13px;transition:border-color 0.2s;}
+.ibox.drag{border-color:var(--gold);}
+.photo-btn{background:none;border:none;cursor:pointer;padding:4px;opacity:0.4;flex-shrink:0;transition:opacity 0.2s;color:var(--mid);display:flex;align-items:center;}
+.photo-btn:hover{opacity:0.85;}
+#msg-in{flex:1;background:transparent;border:none;outline:none;resize:none;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--black);line-height:1.5;max-height:100px;overflow-y:auto;}
+#msg-in::placeholder{color:#B8A898;}
+.send-btn{width:33px;height:33px;background:var(--black);color:var(--surf);border:none;border-radius:2px;font-size:14px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.2s,transform 0.15s;}
+.send-btn:hover:not(:disabled){transform:scale(1.07);}.send-btn:disabled{opacity:0.3;cursor:default;}
+.disc{text-align:center;font-size:10px;color:var(--light);margin-top:6px;}
+.privacy-notice{background:var(--white);border:1px solid var(--bord2);border-radius:4px;padding:16px 18px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px;}
+.privacy-text{font-size:12.5px;color:var(--mid);line-height:1.7;}
+.privacy-text strong{color:var(--black);font-weight:500;}
+.photo-tips{background:var(--bg);border:1px solid var(--bord);border-radius:4px;padding:16px 18px;margin-bottom:16px;}
+.photo-tips-title{font-size:9.5px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+.photo-tip{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--mid);padding:6px 0;border-bottom:1px solid var(--bord2);}
+.photo-tip:last-child{border-bottom:none;}.tip-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+.scan-zone{border:1.5px dashed var(--bord);border-radius:4px;padding:32px 20px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:16px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.scan-zone:hover,.scan-zone.drag{border-color:var(--gold);background:rgba(184,151,90,0.04);}
+.scan-zone svg{width:32px;height:32px;stroke:var(--bord);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.2s;}
+.scan-zone:hover svg,.scan-zone.drag svg{stroke:var(--gold);}
+.scan-text{font-size:13.5px;color:var(--mid);line-height:1.7;}
+.scan-prev{border-radius:8px;max-width:100%;display:block;margin:0 auto 16px;max-height:220px;object-fit:contain;}
+.rut-card{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:18px;margin-bottom:10px;}
+.rut-card-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;margin-bottom:3px;}
+.rut-card-date{font-size:11px;color:var(--light);margin-bottom:10px;}
+.rut-card-preview{font-size:13px;color:var(--mid);line-height:1.7;}
+.rut-card-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.rut-content{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:22px;margin-bottom:14px;font-size:13.5px;line-height:1.82;}
+.rut-content h3{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin:12px 0 5px;}
+.rut-content h3:first-child{margin-top:0;}
+.rut-content ul{padding-left:15px;margin:4px 0 8px;}
+.rut-content li{margin-bottom:4px;color:var(--mid);line-height:1.65;}
+.rut-content strong{color:var(--black);}
+.empty{text-align:center;padding:56px 20px;}
+.empty svg{width:38px;height:38px;stroke:var(--bord);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 16px;display:block;}
+.empty-text{font-size:14px;color:var(--light);line-height:1.7;margin-bottom:18px;}
+.btn-p{display:inline-block;background:var(--black);color:var(--surf);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:11px 22px;border-radius:2px;border:none;cursor:pointer;text-decoration:none;transition:background 0.2s;}
+.btn-p:hover{background:#3A2E24;}
+.btn-o{display:inline-block;background:transparent;color:var(--black);font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px;border-radius:2px;border:1.5px solid var(--bord);cursor:pointer;text-decoration:none;transition:all 0.2s;}
+.btn-o:hover{border-color:var(--gold);color:var(--gold);}
+.promo-badge{background:var(--gold);color:var(--black);font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:2px;display:inline-block;margin-bottom:10px;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;}
+.pt{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:14px 13px;text-decoration:none;display:flex;flex-direction:column;gap:7px;transition:all 0.2s;}
+.pt:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 5px 14px rgba(80,60,30,0.09);}
+.pt-cat{font-size:9.5px;color:var(--gold);letter-spacing:0.14em;text-transform:uppercase;}
+.pt-name{font-size:12px;color:var(--black);line-height:1.4;font-weight:500;flex:1;}
+.pt-cta{font-size:10.5px;color:var(--gold);letter-spacing:0.06em;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,80%,100%{transform:scale(0.55);opacity:0.25}40%{transform:scale(1);opacity:1}}
+::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bord);border-radius:3px}
+</style>
 </head>
 <body>
-
 <div id="toast"></div>
-
-<!-- ONBOARDING -->
 <div id="onboarding">
   <div class="ob-card">
     <div class="ob-mono">A</div>
     <h1 class="ob-title">Adri</h1>
     <p class="ob-sub">por Adriana Beauty Studios</p>
-    <p class="ob-text">Tu asesora personal de skincare.<br>Antes de empezar, ¿cómo te llamas?</p>
+    <p class="ob-text">Tu asesora personal de skincare.<br>Antes de empezar, como te llamas?</p>
     <input class="ob-input" id="name-in" type="text" placeholder="Tu nombre" maxlength="40" onkeydown="if(event.key==='Enter')startApp()"/>
-    <button class="ob-btn" onclick="startApp()">Comenzar mi análisis →</button>
+    <button class="ob-btn" onclick="startApp()">Comenzar mi analisis</button>
   </div>
 </div>
-
-<!-- APP -->
 <div id="app" style="display:none">
+  <div class="vat-strip"><span>Volver a Ti</span> · Adriana Beauty Studios</div>
   <header>
     <div class="brand">
       <div class="brand-mono">A</div>
@@ -218,179 +173,120 @@
     </div>
     <div class="header-right">
       <span id="greeting"></span>
-      <a href="https://wa.me/17862538501?text=Hola%20Adriana!%20Quiero%20agendar%20una%20consulta%20personalizada." target="_blank" class="btn-res">Reservar Cita</a>
+      <a href="https://wa.me/17862538501?text=Hola%20Adriana!%20Quiero%20agendar%20una%20consulta." target="_blank" class="btn-res">Reservar Cita</a>
     </div>
   </header>
-
   <nav id="nav">
-    <!-- Chat -->
-    <button class="nav-btn active" onclick="show('chat')" id="nb-chat">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Chat
-    </button>
-    <!-- Selfie -->
-    <button class="nav-btn" onclick="show('selfie')" id="nb-selfie">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.343 6.343a8 8 0 1 0 11.314 11.314A8 8 0 0 0 6.343 6.343z"/><path d="M9 2h6M12 2v4M2 9v6M22 9v6"/></svg>
-      Selfie
-    </button>
-    <!-- Scan -->
-    <button class="nav-btn" onclick="show('scan')" id="nb-scan">
-      <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
-      Escanear
-    </button>
-    <!-- Rutina -->
-    <button class="nav-btn" onclick="show('rutina')" id="nb-rutina">
-      <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      Mi Rutina
-    </button>
-    <!-- Historial -->
-    <button class="nav-btn" onclick="show('historial')" id="nb-historial">
-      <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
-      Historial
-    </button>
-    <!-- Productos -->
-    <button class="nav-btn" onclick="show('productos')" id="nb-productos">
-      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      Productos
-    </button>
+    <button class="nav-btn active" onclick="show('chat')" id="nb-chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</button>
+    <button class="nav-btn" onclick="show('selfie')" id="nb-selfie"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Selfie</button>
+    <button class="nav-btn" onclick="show('scan')" id="nb-scan"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Consulta 1:1</button>
+    <button class="nav-btn" onclick="show('rutina')" id="nb-rutina"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Mi Rutina</button>
+    <button class="nav-btn" onclick="show('historial')" id="nb-historial"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>Historial</button>
+    <button class="nav-btn" onclick="show('productos')" id="nb-productos"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Productos</button>
   </nav>
-
-  <!-- CHAT -->
   <div class="screen active" id="sc-chat" style="flex-direction:column">
     <div id="chat-msgs">
       <div class="welcome-block" id="welcome-block">
-        <div class="w-lbl"><span class="gline"></span><span class="sec-tag">Diagnóstico personalizado</span><span class="gline"></span></div>
-        <h1 class="w-title">Hola, soy <em>Adri</em></h1>
+        <div class="w-lbl"><span class="gline"></span><span class="sec-tag">Tu asesora personal</span><span class="gline"></span></div>
+        <h1 class="w-title">Hola, soy <em style="font-style:italic;color:var(--gold)">Adri</em></h1>
         <h2 class="w-sub">el glow que tu piel estaba esperando</h2>
-        <p class="w-text" id="w-text"></p>
-        <div class="w-banner"><span class="star">✦</span> Escríbeme <strong>&nbsp;RUTINA&nbsp;</strong> — te digo exactamente qué usar según TU piel</div>
+        <p class="w-greeting" id="w-greeting"></p>
+        <button class="w-btn" onclick="document.getElementById('msg-in').focus()">Comenzar mi analisis</button>
       </div>
     </div>
     <div class="chat-foot">
-      <div id="prev-row" class="prev-row" style="display:none">
-        <div class="prev-wrap">
-          <img id="prev-img" class="prev-img" src="" alt=""/>
-          <button class="prev-x" onclick="removeImg()">✕</button>
-          <div class="prev-lbl">Lista ✓</div>
-        </div>
-      </div>
+      <div id="prev-row" class="prev-row" style="display:none"><div class="prev-wrap"><img id="prev-img" class="prev-img" src="" alt=""/><button class="prev-x" onclick="removeImg()">X</button><div class="prev-lbl">Lista</div></div></div>
       <div class="ibox" id="ibox" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="dropChat(event)">
-        <button class="photo-btn" onclick="document.getElementById('cf').click()" title="Subir foto">
-          <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </button>
+        <button class="photo-btn" onclick="document.getElementById('cf').click()"><svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></button>
         <input type="file" id="cf" accept="image/*" style="display:none" onchange="handleFile(this.files[0],'chat')"/>
-        <textarea id="msg-in" rows="1" placeholder="Cuéntame sobre tu piel…" oninput="resize(this)" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
-        <button class="send-btn" id="send-btn" onclick="sendChat()" disabled>
-          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
-        </button>
+        <textarea id="msg-in" rows="1" placeholder="Cuentame sobre tu piel..." oninput="resize(this)" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
+        <button class="send-btn" id="send-btn" onclick="sendChat()" disabled><svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></button>
       </div>
-      <p class="disc">Diagnóstico orientativo · No reemplaza a un dermatólogo</p>
+      <p class="disc">Diagnostico orientativo - No reemplaza a un dermatologo</p>
     </div>
   </div>
-
-  <!-- SELFIE -->
   <div class="screen" id="sc-selfie">
     <div class="screen-inner">
-      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Análisis Facial</span></div>
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Analisis Facial</span></div>
       <h2 class="sec-title">Selfie</h2>
-      <p class="sec-sub">Sube una foto de tu rostro para un análisis completo</p>
+      <p class="sec-sub">Sube una foto de tu rostro para un analisis completo</p>
+      <div class="privacy-notice">
+        <svg style="width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="privacy-text"><strong>Tu foto es 100% privada.</strong> Las imagenes se usan exclusivamente para el analisis de tu piel y no se almacenan, comparten ni utilizan para ningun otro proposito.</div>
+      </div>
+      <div class="photo-tips">
+        <div class="photo-tips-title">Para el mejor analisis</div>
+        <div class="photo-tip"><span class="tip-dot"></span>Buena luz natural, cerca de una ventana, sin flash</div>
+        <div class="photo-tip"><span class="tip-dot"></span>Sin filtros ni edicion de ningun tipo</div>
+        <div class="photo-tip"><span class="tip-dot"></span>Sin maquillaje, rostro completamente limpio</div>
+        <div class="photo-tip"><span class="tip-dot"></span>Foto clara, de frente y a nivel de los ojos</div>
+      </div>
       <div class="scan-zone" id="sz-selfie" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="dropSelfie(event)" onclick="document.getElementById('sf').click()">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><circle cx="18" cy="8" r="2" stroke-dasharray="2 2"/></svg>
-        <p class="scan-text">Arrastra tu foto aquí o toca para seleccionar</p>
-        <p class="scan-hint">Recomendado: luz natural, sin filtros</p>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <p class="scan-text">Toca para tomar tu foto o seleccionar de la galeria</p>
       </div>
-      <input type="file" id="sf" accept="image/*" style="display:none" onchange="handleFile(this.files[0],'selfie')"/>
+      <input type="file" id="sf" accept="image/*" capture="user" style="display:none" onchange="handleFile(this.files[0],'selfie')"/>
       <img id="sf-prev" class="scan-prev" style="display:none" src="" alt=""/>
-      <div id="sf-result"></div>
-      <div id="sf-act" style="display:none;margin-top:12px">
-        <button class="btn-p" onclick="analyzeSelfie()">✦ Analizar mi piel</button>
-      </div>
+      <div id="sf-act" style="display:none;margin-top:12px"><button class="btn-p" onclick="analyzeSelfie()">Analizar mi piel</button></div>
     </div>
   </div>
-
-  <!-- SCAN -->
   <div class="screen" id="sc-scan">
     <div class="screen-inner">
-      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Compatibilidad</span></div>
-      <h2 class="sec-title">Escanear Producto</h2>
-      <p class="sec-sub">Análisis de compatibilidad con tus productos</p>
-
-      <!-- PREMIUM LOCK -->
-      <div style="background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:32px 24px;text-align:center;margin-bottom:16px;">
-        <div style="width:48px;height:48px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-          <svg style="width:20px;height:20px;stroke:#B8975A;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Personalizado</span></div>
+      <h2 class="sec-title">Consulta 1:1</h2>
+      <p class="sec-sub">Analisis personalizado con los productos que ya tienes en casa</p>
+      <div style="background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:32px 24px;text-align:center;">
+        <div style="width:48px;height:48px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;"><svg style="width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="promo-badge">Primeras 10 clientas - Precio especial</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:10px;">Analisis con tus productos</h3>
+        <p style="font-size:13.5px;color:var(--mid);line-height:1.78;margin-bottom:24px;">Tienes productos en casa y no sabes si van bien con tu piel? Analizamos juntas todo lo que tienes y creamos tu rutina exacta.</p>
+        <div style="background:var(--bg);border:1px solid var(--bord2);border-radius:4px;padding:18px;margin-bottom:22px;">
+          <div style="font-size:9.5px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;">Oferta de lanzamiento</div>
+          <div style="display:flex;align-items:baseline;justify-content:center;gap:12px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--black);">$17</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--light);text-decoration:line-through;">$37</div>
+          </div>
+          <div style="font-size:11.5px;color:var(--light);margin-top:4px;">30 minutos - Video o WhatsApp - Miami</div>
         </div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:8px;">Análisis personalizado</h3>
-        <p style="font-size:13.5px;color:var(--mid);line-height:1.75;margin-bottom:6px;">¿Tienes productos en casa y no sabes si van bien con tu piel?</p>
-        <p style="font-size:13.5px;color:var(--mid);line-height:1.75;margin-bottom:24px;">En tu consulta 1:1 analizamos juntas todo lo que tienes y creamos tu rutina exacta — combinando lo que ya tienes con lo que realmente necesitas.</p>
-        <div style="background:var(--bg);border:1px solid var(--bord2);border-radius:4px;padding:16px;margin-bottom:20px;">
-          <div style="font-size:9.5px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Consulta 1:1 con Adriana</div>
-          <div style="font-size:9.5px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;">Oferta de lanzamiento · Primeras 10 clientas</div><div style="display:flex;align-items:baseline;justify-content:center;gap:12px;"><div style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--black);">$17</div><div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--light);text-decoration:line-through;">$37</div></div>
-          <div style="font-size:11.5px;color:var(--light);margin-top:4px;">30 minutos · Video o WhatsApp · Miami</div>
+        <div style="text-align:left;margin-bottom:22px;">
+          <div style="font-size:9.5px;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;">Lo que incluye</div>
+          <div style="font-size:13px;color:var(--mid);line-height:2.1;">
+            <div style="display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid var(--bord2)"><span style="width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0;display:inline-block"></span>Revision de los productos que ya tienes en casa</div>
+            <div style="display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid var(--bord2)"><span style="width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0;display:inline-block"></span>Rutina AM y PM exacta para tu tipo de piel</div>
+            <div style="display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid var(--bord2)"><span style="width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0;display:inline-block"></span>Que ingredientes combinar y cuales evitar</div>
+            <div style="display:flex;align-items:center;gap:10px;padding:5px 0"><span style="width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0;display:inline-block"></span>Lista de lo que necesitas agregar</div>
+          </div>
         </div>
-        <div style="font-size:12px;color:var(--mid);margin-bottom:20px;line-height:1.7;">
-          ✦ Revisamos tus productos actuales<br>
-          ✦ Creamos tu rutina AM y PM exacta<br>
-          ✦ Ingredientes que combinar y evitar<br>
-          ✦ Lista de lo que necesitas comprar
-        </div>
-        <a href="https://wa.me/17862538501?text=Hola%20Adriana!%20Quiero%20reservar%20mi%20consulta%201%3A1%20de%20skincare%20por%20%2417%20de%20lanzamiento." target="_blank" class="btn-p" style="display:block;text-align:center;">
-          Reservar mi consulta · $17 →
-        </a>
+        <a href="https://wa.me/17862538501?text=Hola%20Adriana!%20Quiero%20reservar%20mi%20consulta%201%3A1%20a%20precio%20de%20lanzamiento%20%2417." target="_blank" class="btn-p" style="display:block;text-align:center;">Reservar mi consulta - $17</a>
+        <p style="font-size:10.5px;color:var(--light);margin-top:12px;">Precio regular $37 - Solo para las primeras 10 clientas</p>
       </div>
     </div>
   </div>
-
-  <!-- RUTINA -->
-  <div class="screen" id="sc-rutina">
-    <div class="screen-inner">
-      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Tu rutina</span></div>
-      <h2 class="sec-title">Mi Rutina</h2>
-      <div id="rut-content"></div>
-    </div>
-  </div>
-
-  <!-- HISTORIAL -->
-  <div class="screen" id="sc-historial">
-    <div class="screen-inner">
-      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Rutinas anteriores</span></div>
-      <h2 class="sec-title">Historial</h2>
-      <div id="hist-content"></div>
-    </div>
-  </div>
-
-  <!-- PRODUCTOS -->
-  <div class="screen" id="sc-productos">
-    <div class="screen-inner">
-      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Mis recomendados</span></div>
-      <h2 class="sec-title">Productos</h2>
-      <p class="sec-sub">Todo lo que uso, recomiendo y receto · Links directos a Amazon</p>
-      <div class="prod-grid" id="prod-grid"></div>
-    </div>
-  </div>
+  <div class="screen" id="sc-rutina"><div class="screen-inner"><div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Tu rutina</span></div><h2 class="sec-title">Mi Rutina</h2><div id="rut-content"></div></div></div>
+  <div class="screen" id="sc-historial"><div class="screen-inner"><div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Rutinas anteriores</span></div><h2 class="sec-title">Historial</h2><div id="hist-content"></div></div></div>
+  <div class="screen" id="sc-productos"><div class="screen-inner"><div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Mis recomendados</span></div><h2 class="sec-title">Productos</h2><p class="sec-sub">Todo lo que uso, recomiendo y receto - Links directos a Amazon</p><div class="prod-grid" id="prod-grid"></div></div></div>
 </div>
-
 <script>
-const WA="https://wa.me/17862538501?text=Hola%20Adriana!%20Quiero%20agendar%20una%20consulta%20personalizada.";
+const WA="https://wa.me/17862538501?text=Hola%20Adriana!%20Quiero%20agendar%20una%20consulta.";
 const PRODS=[
   {name:"CeraVe Hydrating Cleanser",url:"https://amzn.to/4t6qMY7",cat:"Limpiador"},
   {name:"La Roche-Posay Toleriane Hydrating Gentle Cleanser",url:"https://amzn.to/4tO0JWY",cat:"Limpiador"},
   {name:"La Roche-Posay Effaclar Foaming Gel",url:"https://amzn.to/4vYBySV",cat:"Limpiador"},
   {name:"Banila Co Clean It Zero Cleansing Balm",url:"https://amzn.to/3QElfui",cat:"Desmaquillante"},
-  {name:"Paula's Choice BHA 2%",url:"https://amzn.to/424qbLr",cat:"Exfoliante"},
-  {name:"COSRX AHA BHA Toner",url:"https://amzn.to/4w4lmzC",cat:"Tónico"},
-  {name:"d'alba First Spray Serum",url:"https://amzn.to/4w1bzu1",cat:"Sérum"},
-  {name:"COSRX Snail Mucin 96%",url:"https://amzn.to/4n4G0eY",cat:"Sérum"},
-  {name:"TruSkin Vitamin C Serum",url:"https://amzn.to/3R8hqO2",cat:"Sérum"},
-  {name:"AXIS-Y Dark Spot Correcting Glow Serum",url:"https://amzn.to/4tR046X",cat:"Sérum"},
-  {name:"Dr. Jart+ Cicapair Tiger Grass Serum",url:"https://amzn.to/4cY4DFq",cat:"Sérum"},
-  {name:"SkinCeuticals CE Ferulic",url:"https://amzn.to/4cTUoBX",cat:"Sérum"},
+  {name:"Paula Choice BHA 2%",url:"https://amzn.to/424qbLr",cat:"Exfoliante"},
+  {name:"COSRX AHA BHA Toner",url:"https://amzn.to/4w4lmzC",cat:"Tonico"},
+  {name:"d alba First Spray Serum",url:"https://amzn.to/4w1bzu1",cat:"Serum"},
+  {name:"COSRX Snail Mucin 96%",url:"https://amzn.to/4n4G0eY",cat:"Serum"},
+  {name:"TruSkin Vitamin C Serum",url:"https://amzn.to/3R8hqO2",cat:"Serum"},
+  {name:"AXIS-Y Dark Spot Correcting Glow Serum",url:"https://amzn.to/4tR046X",cat:"Serum"},
+  {name:"Dr. Jart+ Cicapair Tiger Grass Serum",url:"https://amzn.to/4cY4DFq",cat:"Serum"},
+  {name:"SkinCeuticals CE Ferulic",url:"https://amzn.to/4cTUoBX",cat:"Serum"},
   {name:"CeraVe Retinol Serum",url:"https://amzn.to/4eR9wT9",cat:"Retinol"},
-  {name:"Paula's Choice Retinol 1%",url:"https://amzn.to/4t9HGVR",cat:"Retinol"},
+  {name:"Paula Choice Retinol 1%",url:"https://amzn.to/4t9HGVR",cat:"Retinol"},
   {name:"Neutrogena Hydro Boost Gel",url:"https://amzn.to/4cW0Wjm",cat:"Hidratante"},
   {name:"CeraVe PM Moisturizing Lotion",url:"https://amzn.to/48rVDqK",cat:"Hidratante"},
   {name:"Tatcha The Water Cream",url:"https://amzn.to/3QPUovh",cat:"Hidratante"},
-  {name:"Kiehl's Ultra Facial Cream",url:"https://amzn.to/48xeWPh",cat:"Hidratante"},
+  {name:"Kiehl Ultra Facial Cream",url:"https://amzn.to/48xeWPh",cat:"Hidratante"},
   {name:"Olay Regenerist Cream",url:"https://amzn.to/4uh2knK",cat:"Anti-edad"},
   {name:"Neutrogena Rapid Wrinkle Repair Cream",url:"https://amzn.to/49kAPl9",cat:"Anti-edad"},
   {name:"CeraVe Skin Renewing Night Cream",url:"https://amzn.to/3OXWJng",cat:"Noche"},
@@ -398,296 +294,63 @@ const PRODS=[
   {name:"Aquaphor Healing Ointment",url:"https://amzn.to/4cERO3R",cat:"Tratamiento"},
   {name:"Laneige Lip Sleeping Mask",url:"https://amzn.to/4t8B1uW",cat:"Labios"},
   {name:"Summer Fridays Lip Butter Balm",url:"https://amzn.to/4w6Pzhx",cat:"Labios"},
-  {name:"Producto especial Adri",url:"https://amzn.to/4u9Sl3u",cat:"Especial"},
+  {name:"Producto especial Adri",url:"https://amzn.to/4u9Sl3u",cat:"Especial"}
 ];
 const PJ=JSON.stringify(PRODS.map(p=>({name:p.name,url:p.url,category:p.cat})));
-
-let uName='',chatHist=[],curImg=null,selfieImg=null,scanImg=null;
+let uName='',chatHist=[],curImg=null,selfieImg=null;
 const save=(k,v)=>{try{localStorage.setItem('adri_'+k,JSON.stringify(v))}catch(e){}};
 const load=(k)=>{try{const v=localStorage.getItem('adri_'+k);return v?JSON.parse(v):null}catch(e){return null}};
-
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
-
-function startApp(){
-  const n=document.getElementById('name-in').value.trim();
-  if(!n){document.getElementById('name-in').focus();return;}
-  uName=n;save('name',n);
-  document.getElementById('onboarding').style.display='none';
-  document.getElementById('app').style.display='flex';
-  init();
-}
-
-function init(){
-  document.getElementById('greeting').textContent=uName;
-  document.getElementById('w-text').textContent=`Hola ${uName}, soy Adri. Cuéntame sobre tu piel o sube una foto — te doy una rutina completa con los productos que uso, recomiendo y receto.`;
-  const saved=load('chat');if(saved)chatHist=saved;
-  renderProds();
-}
-
-window.addEventListener('DOMContentLoaded',()=>{
-  const n=load('name');if(n){uName=n;document.getElementById('onboarding').style.display='none';document.getElementById('app').style.display='flex';init();}
-});
-
-function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('sc-'+id).classList.add('active');
-  document.getElementById('nb-'+id).classList.add('active');
-  if(id==='rutina')renderRutina();
-  if(id==='historial')renderHistorial();
-}
-
-function sys(ctx){
-  return `Eres Adri, asesora experta en skincare de Adriana Beauty Studios — esthétician certificada con más de 10 años en Miami.
-La clienta se llama ${uName}. Llámala SIEMPRE por su nombre. NUNCA uses "hermosa","amor","guapa","bonita" ni apelativos afectivos. Trato profesional y cálido.
-CATÁLOGO — recomienda SIEMPRE estos productos primero: ${PJ}
-${ctx||''}
-En análisis incluye: 1)Análisis de piel 2)Diagnóstico 3)Rutina AM☀️ y PM🌙 4)Guía de uso 5)Qué combinar y NO combinar.
-Al final incluye EXACTAMENTE: PRODUCT_CARDS:[{"name":"nombre","url":"url","reason":"razón"}] (máx 5 productos)
-Si generas rutina completa incluye también: SAVE_RUTINA:[texto completo en texto plano]
-Cierra con: "💆‍♀️ ${uName}, ¿quieres resultados más profundos? Reserva tu facial clínico personalizado conmigo en Miami."
-Español. Elegante. Concisa.`;
-}
-
-async function api(msgs,ctx){
-  const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:1000,system:sys(ctx),messages:msgs})});
-  const d=await r.json();
-  return d.content?.map(b=>b.text||'').join('')||'No pude completar el análisis. Intenta de nuevo.';
-}
-
-function parseAll(raw){
-  let text=raw,cards=[],rutina=null;
-  const cm=raw.match(/PRODUCT_CARDS:(\[[\s\S]*?\])/);
-  if(cm){try{cards=JSON.parse(cm[1])}catch{};text=text.replace(/PRODUCT_CARDS:\[[\s\S]*?\]/,'').trim();}
-  const rm=text.match(/SAVE_RUTINA:\[([\s\S]*?)\]/);
-  if(rm){rutina=rm[1].trim();text=text.replace(/SAVE_RUTINA:\[[\s\S]*?\]/,'').trim();}
-  return{text,cards,rutina};
-}
-
-async function sendChat(){
-  const inp=document.getElementById('msg-in');
-  const txt=inp.value.trim();
-  if(!txt&&!curImg)return;
-  document.getElementById('welcome-block')?.remove();
-  const imgB=curImg?{...curImg}:null;
-  addUserBubble(txt,imgB);
-  const uc=curImg?[{type:'image',source:{type:'base64',media_type:curImg.type,data:curImg.data}},{type:'text',text:txt||'Analiza mi piel.'}]:txt;
-  chatHist.push({role:'user',content:uc});
-  inp.value='';inp.style.height='auto';removeImg();
-  document.getElementById('send-btn').disabled=true;
-  const tid=addTyping();scrollBot();
-  try{
-    const raw=await api(chatHist);
-    const{text,cards,rutina}=parseAll(raw);
-    if(rutina){saveRutina(rutina);}
-    chatHist.push({role:'assistant',content:text});
-    save('chat',chatHist.slice(-20));
-    removeTyping(tid);addAdriBubble(text,cards,rutina);
-  }catch(e){removeTyping(tid);addAdriBubble('Error de conexión. Por favor intenta de nuevo.',[],null);}
-  scrollBot();
-}
-
+function getGreeting(){const h=new Date().getHours();if(h>=5&&h<12)return'Buenos dias, '+uName+'. Hoy es un buen dia para volver a ti.';if(h>=12&&h<18)return'Buenas tardes, '+uName+'. Ya te dedicaste un momento hoy?';return'Buenas noches, '+uName+'. La noche es tuya. Empieza por tu piel.';}
+function startApp(){const n=document.getElementById('name-in').value.trim();if(!n){document.getElementById('name-in').focus();return;}uName=n;save('name',n);document.getElementById('onboarding').style.display='none';document.getElementById('app').style.display='flex';init();}
+function init(){document.getElementById('greeting').textContent=uName;document.getElementById('w-greeting').textContent=getGreeting();const saved=load('chat');if(saved)chatHist=saved;renderProds();}
+window.addEventListener('DOMContentLoaded',()=>{const n=load('name');if(n){uName=n;document.getElementById('onboarding').style.display='none';document.getElementById('app').style.display='flex';init();}});
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('sc-'+id).classList.add('active');document.getElementById('nb-'+id).classList.add('active');if(id==='rutina')renderRutina();if(id==='historial')renderHistorial();}
+function sys(){return'Eres Adri, asesora experta en skincare de Adriana Beauty Studios, esthetician certificada con mas de 10 anos en Miami. Formas parte de Volver a Ti de Adriana Beauty Studios.\nLa clienta se llama '+uName+'. Llamala SIEMPRE por su nombre. NUNCA uses hermosa, amor, guapa, bonita. Trato profesional, calido y elegante. Sin emojis.\nCATALOGO, recomienda SIEMPRE estos primero: '+PJ+'\nIncluye: 1)Analisis 2)Diagnostico 3)Rutina AM y PM 4)Guia de uso 5)Combinaciones.\nAl final: PRODUCT_CARDS:[{"name":"nombre","url":"url","reason":"razon"}] max 5.\nSi generas rutina completa incluye: SAVE_RUTINA:[texto completo]\nCierra: "'+uName+', quieres resultados mas profundos? Reserva tu consulta 1:1 conmigo, precio de lanzamiento $17 para las primeras 10 clientas."\nEspanol. Elegante. Concisa.';}
+async function api(msgs){const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:1000,system:sys(),messages:msgs})});const d=await r.json();return d.content?.map(b=>b.text||'').join('')||'No pude completar el analisis. Intenta de nuevo.';}
+function parseAll(raw){let text=raw,cards=[],rutina=null;const cm=raw.match(/PRODUCT_CARDS:(\[[\s\S]*?\])/);if(cm){try{cards=JSON.parse(cm[1])}catch{};text=text.replace(/PRODUCT_CARDS:\[[\s\S]*?\]/,'').trim();}const rm=text.match(/SAVE_RUTINA:\[([\s\S]*?)\]/);if(rm){rutina=rm[1].trim();text=text.replace(/SAVE_RUTINA:\[[\s\S]*?\]/,'').trim();}return{text,cards,rutina};}
+async function sendChat(){const inp=document.getElementById('msg-in');const txt=inp.value.trim();if(!txt&&!curImg)return;document.getElementById('welcome-block')?.remove();const imgB=curImg?{...curImg}:null;addUserBubble(txt,imgB);const uc=curImg?[{type:'image',source:{type:'base64',media_type:curImg.type,data:curImg.data}},{type:'text',text:txt||'Analiza mi piel.'}]:txt;chatHist.push({role:'user',content:uc});inp.value='';inp.style.height='auto';removeImg();document.getElementById('send-btn').disabled=true;const tid=addTyping();scrollBot();try{const raw=await api(chatHist);const{text,cards,rutina}=parseAll(raw);if(rutina)saveRutina(rutina);chatHist.push({role:'assistant',content:text});save('chat',chatHist.slice(-20));removeTyping(tid);addAdriBubble(text,cards,rutina);}catch(e){removeTyping(tid);addAdriBubble('Error de conexion. Por favor intenta de nuevo.',[],null);}scrollBot();}
 function dropChat(e){e.preventDefault();document.getElementById('ibox').classList.remove('drag');handleFile(e.dataTransfer.files[0],'chat');}
 function dropSelfie(e){e.preventDefault();document.getElementById('sz-selfie').classList.remove('drag');handleFile(e.dataTransfer.files[0],'selfie');}
-function dropScan(e){e.preventDefault();document.getElementById('sz-scan').classList.remove('drag');handleFile(e.dataTransfer.files[0],'scan');}
-
-async function analyzeSelfie(){
-  if(!selfieImg)return;
-  show('chat');document.getElementById('welcome-block')?.remove();
-  addUserBubble('Analiza mi piel con esta foto.',{...selfieImg});
-  const uc=[{type:'image',source:{type:'base64',media_type:selfieImg.type,data:selfieImg.data}},{type:'text',text:'Analiza mi tipo de piel con esta foto y dame una rutina personalizada completa. Incluye SAVE_RUTINA con la rutina.'}];
-  chatHist.push({role:'user',content:uc});
-  const tid=addTyping();scrollBot();
-  try{
-    const raw=await api(chatHist);
-    const{text,cards,rutina}=parseAll(raw);
-    if(rutina){saveRutina(rutina);}
-    chatHist.push({role:'assistant',content:text});
-    save('chat',chatHist.slice(-20));
-    removeTyping(tid);addAdriBubble(text,cards,rutina);
-  }catch(e){removeTyping(tid);addAdriBubble('Error de conexión.',[],null);}
-  scrollBot();
-}
-
-async function scanProd(){
-  if(!scanImg)return;
-  const el=document.getElementById('sc-result');
-  const cb=document.getElementById('sc-compat');
-  el.innerHTML='<div class="scan-result"><div class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="typing-txt">Analizando producto...</span></div></div>';
-  cb.style.display='none';
-  try{
-    const msgs=[{role:'user',content:[
-      {type:'image',source:{type:'base64',media_type:scanImg.type,data:scanImg.data}},
-      {type:'text',text:`Analiza este producto de skincare para ${uName}. Incluye al inicio EXACTAMENTE en la primera línea: COMPAT:XX donde XX es un número del 0 al 100 que indica el porcentaje de compatibilidad general con una piel promedio. Luego: 1) Qué es el producto. 2) Ingredientes principales y sus beneficios. 3) Para qué tipos de piel es ideal y para cuáles NO. 4) Ingredientes que requieren cuidado. 5) Cómo incorporarlo en una rutina. Sé específica y profesional.`}
-    ]}];
-    const raw=await api(msgs,`Analizando producto para ${uName}.`);
-    
-    // Parse compatibility score
-    const compatMatch=raw.match(/COMPAT:(\d+)/);
-    let compatScore=75;
-    let cleanRaw=raw;
-    if(compatMatch){compatScore=parseInt(compatMatch[1]);cleanRaw=raw.replace(/COMPAT:\d+\n?/,'').trim();}
-    
-    const{text,cards}=parseAll(cleanRaw);
-    
-    // Show compatibility bar
-    cb.style.display='block';
-    document.getElementById('compat-pct').innerHTML=`${compatScore}<span>%</span>`;
-    setTimeout(()=>{document.getElementById('bar-fill').style.width=compatScore+'%';},100);
-    const status=compatScore>=80?'✦ Excelente para tu piel':compatScore>=60?'Compatible con precaución':'No recomendado para tu tipo de piel';
-    document.getElementById('compat-status').textContent=status;
-    
-    el.innerHTML=`<div class="scan-result">${fmt(text)}</div>`;
-    if(cards.length)el.innerHTML+=renderCards(cards,'0');
-    el.innerHTML+=`<div class="wa-wrap" style="margin-left:0;margin-top:14px"><a href="${WA}" target="_blank" class="wa-cta">Reservar Mi Cita →</a><p class="wa-note">Miami · Facial clínico personalizado</p></div>`;
-  }catch(e){el.innerHTML='<div class="scan-result">Error al analizar. Intenta de nuevo.</div>';}
-}
-
-function handleFile(file,ctx){
-  if(!file||!file.type.startsWith('image/'))return;
-  // Compress image before sending to avoid Vercel 4.5MB limit
-  const img=new Image();
-  const objUrl=URL.createObjectURL(file);
-  img.onload=()=>{
-    URL.revokeObjectURL(objUrl);
-    const canvas=document.createElement('canvas');
-    const MAX=1024;
-    let w=img.width,h=img.height;
-    if(w>MAX||h>MAX){if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;}}
-    canvas.width=w;canvas.height=h;
-    canvas.getContext('2d').drawImage(img,0,0,w,h);
-    const compressed=canvas.toDataURL('image/jpeg',0.7);
-    const d={data:compressed.split(',')[1],type:'image/jpeg',src:compressed};
-    if(ctx==='chat'){curImg=d;document.getElementById('prev-img').src=compressed;document.getElementById('prev-row').style.display='block';updBtn();}
-    else if(ctx==='selfie'){selfieImg=d;const p=document.getElementById('sf-prev');p.src=compressed;p.style.display='block';document.getElementById('sf-act').style.display='block';document.getElementById('sf-result').innerHTML='';}
-    else if(ctx==='scan'){scanImg=d;const p=document.getElementById('sc-prev');p.src=compressed;p.style.display='block';document.getElementById('sc-act').style.display='block';document.getElementById('sc-result').innerHTML='';document.getElementById('sc-compat').style.display='none';}
-  };
-  img.src=objUrl;
-}
-
+async function analyzeSelfie(){if(!selfieImg)return;show('chat');document.getElementById('welcome-block')?.remove();addUserBubble('Analiza mi piel con esta foto.',{...selfieImg});const uc=[{type:'image',source:{type:'base64',media_type:selfieImg.type,data:selfieImg.data}},{type:'text',text:'Analiza mi tipo de piel con esta foto y dame una rutina completa. Incluye SAVE_RUTINA.'}];chatHist.push({role:'user',content:uc});const tid=addTyping();scrollBot();try{const raw=await api(chatHist);const{text,cards,rutina}=parseAll(raw);if(rutina)saveRutina(rutina);chatHist.push({role:'assistant',content:text});save('chat',chatHist.slice(-20));removeTyping(tid);addAdriBubble(text,cards,rutina);}catch(e){removeTyping(tid);addAdriBubble('Error de conexion.',[],null);}scrollBot();}
+function handleFile(file,ctx){if(!file||!file.type.startsWith('image/'))return;const img=new Image(),objUrl=URL.createObjectURL(file);img.onload=()=>{URL.revokeObjectURL(objUrl);const canvas=document.createElement('canvas');const MAX=1024;let w=img.width,h=img.height;if(w>MAX||h>MAX){if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;}}canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);const c=canvas.toDataURL('image/jpeg',0.75);const d={data:c.split(',')[1],type:'image/jpeg',src:c};if(ctx==='chat'){curImg=d;document.getElementById('prev-img').src=c;document.getElementById('prev-row').style.display='block';updBtn();}else if(ctx==='selfie'){selfieImg=d;const p=document.getElementById('sf-prev');p.src=c;p.style.display='block';document.getElementById('sf-act').style.display='block';}};img.src=objUrl;}
 function removeImg(){curImg=null;document.getElementById('prev-row').style.display='none';document.getElementById('cf').value='';updBtn();}
 function updBtn(){document.getElementById('send-btn').disabled=!document.getElementById('msg-in').value.trim()&&!curImg;}
 function resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';updBtn();}
-
-function saveRutina(text){
-  const rs=load('rutinas')||[];
-  rs.unshift({date:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'}),text,id:Date.now()});
-  save('rutinas',rs.slice(0,10));save('cur-rutina',text);
-}
-
-function renderRutina(){
-  const r=load('cur-rutina'),el=document.getElementById('rut-content');
-  if(!r){
-    el.innerHTML=`<div class="empty"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><p class="empty-text">Aún no tienes una rutina guardada, ${uName}.<br>Cuéntame sobre tu piel y Adri creará tu rutina personalizada.</p><button class="btn-p" onclick="show('chat')">Hablar con Adri →</button></div>`;
-    return;
-  }
-  el.innerHTML=`<div class="rut-content">${fmt(r)}</div><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="${WA}" target="_blank" class="btn-p">Reservar cita →</a><button class="btn-o" onclick="show('chat')">Actualizar rutina</button></div>`;
-}
-
-function renderHistorial(){
-  const rs=load('rutinas')||[],el=document.getElementById('hist-content');
-  if(!rs.length){
-    el.innerHTML=`<div class="empty"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg><p class="empty-text">Aquí aparecerán tus rutinas anteriores, ${uName}.</p><button class="btn-p" onclick="show('chat')">Crear mi primera rutina →</button></div>`;
-    return;
-  }
-  el.innerHTML=rs.map((r,i)=>`<div class="rut-card"><div class="rut-card-title">${i===0?'Rutina actual':'Rutina #'+(rs.length-i)}</div><div class="rut-card-date">${r.date}</div><div class="rut-card-preview">${esc(r.text.substring(0,120))}...</div><div class="rut-card-actions"><button class="btn-o" onclick="viewHist(${i})" style="font-size:10px;padding:8px 14px">Ver completa</button><button class="btn-o" onclick="useHist(${i})" style="font-size:10px;padding:8px 14px">Usar esta</button></div></div>`).join('');
-}
-
-function viewHist(i){const rs=load('rutinas')||[];if(!rs[i])return;document.getElementById('hist-content').innerHTML=`<button class="btn-o" onclick="renderHistorial()" style="margin-bottom:14px;font-size:10px;padding:8px 14px">← Volver</button><div class="rut-content">${fmt(rs[i].text)}</div>`;}
-function useHist(i){const rs=load('rutinas')||[];if(!rs[i])return;save('cur-rutina',rs[i].text);toast('✦ Rutina activada');show('rutina');}
-
-function renderProds(){
-  document.getElementById('prod-grid').innerHTML=PRODS.map(p=>`<a href="${p.url}" target="_blank" rel="noreferrer" class="pt"><div class="pt-cat">${p.cat}</div><div class="pt-name">${p.name}</div><div class="pt-cta">Ver en Amazon →</div></a>`).join('');
-}
-
-function addUserBubble(text,img){
-  const c=document.getElementById('chat-msgs'),row=document.createElement('div');
-  row.className='msg-row user';
-  let h='';
-  if(img)h+=`<img src="${img.src}" class="msg-img" style="max-width:180px"/>`;
-  if(text)h+=`<span>${esc(text)}</span>`;
-  row.innerHTML=`<div class="b-user">${h}</div>`;
-  c.appendChild(row);
-}
-
+function saveRutina(text){const rs=load('rutinas')||[];rs.unshift({date:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'}),text,id:Date.now()});save('rutinas',rs.slice(0,10));save('cur-rutina',text);}
+function saveRutinaManual(btn){const rutina=btn.closest('.rutina-actions').dataset.rutina;if(!rutina)return;saveRutina(rutina);btn.textContent='Guardada';btn.disabled=true;btn.style.opacity='0.6';toast('Guardada, abriendo WhatsApp...');setTimeout(()=>{const clean=rutina.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').substring(0,1500);const msg=encodeURIComponent('Mi rutina personalizada por Adri\nAdriana Beauty Studios - Volver a Ti\n\n'+clean+'\n\nadri-analyzer1.vercel.app');window.open('https://wa.me/?text='+msg,'_blank');},800);}
+function renderRutina(){const r=load('cur-rutina'),el=document.getElementById('rut-content');if(!r){el.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><p class="empty-text">Aun no tienes una rutina guardada, '+uName+'.<br>Cuentame sobre tu piel y Adri creara tu rutina personalizada.</p><button class="btn-p" onclick="show(\'chat\')">Hablar con Adri</button></div>';return;}el.innerHTML='<div class="rut-content">'+fmt(r)+'<div class="vat-tag">Este es tu momento. Volver a Ti empieza aqui.</div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><a href="'+WA+'" target="_blank" class="btn-p">Reservar cita</a><button class="btn-o" onclick="show(\'chat\')">Actualizar rutina</button></div>';}
+function renderHistorial(){const rs=load('rutinas')||[],el=document.getElementById('hist-content');if(!rs.length){el.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg><p class="empty-text">Aqui apareceran tus rutinas anteriores, '+uName+'.</p><button class="btn-p" onclick="show(\'chat\')">Crear mi primera rutina</button></div>';return;}el.innerHTML=rs.map((r,i)=>'<div class="rut-card"><div class="rut-card-title">'+(i===0?'Rutina actual':'Rutina #'+(rs.length-i))+'</div><div class="rut-card-date">'+r.date+'</div><div class="rut-card-preview">'+esc(r.text.substring(0,120))+'...</div><div class="rut-card-actions"><button class="btn-o" onclick="viewHist('+i+')" style="font-size:10px;padding:8px 14px">Ver completa</button><button class="btn-o" onclick="useHist('+i+')" style="font-size:10px;padding:8px 14px">Usar esta</button></div></div>').join('');}
+function viewHist(i){const rs=load('rutinas')||[];if(!rs[i])return;document.getElementById('hist-content').innerHTML='<button class="btn-o" onclick="renderHistorial()" style="margin-bottom:14px;font-size:10px;padding:8px 14px">Volver</button><div class="rut-content">'+fmt(rs[i].text)+'<div class="vat-tag">Este es tu momento. Volver a Ti empieza aqui.</div></div>';}
+function useHist(i){const rs=load('rutinas')||[];if(!rs[i])return;save('cur-rutina',rs[i].text);toast('Rutina activada');show('rutina');}
+function renderProds(){document.getElementById('prod-grid').innerHTML=PRODS.map(p=>'<a href="'+p.url+'" target="_blank" rel="noreferrer" class="pt"><div class="pt-cat">'+p.cat+'</div><div class="pt-name">'+p.name+'</div><div class="pt-cta">Ver en Amazon</div></a>').join('');}
+function addUserBubble(text,img){const c=document.getElementById('chat-msgs'),row=document.createElement('div');row.className='msg-row user';let h='';if(img)h+='<img src="'+img.src+'" class="msg-img" style="max-width:180px"/>';if(text)h+='<span>'+esc(text)+'</span>';row.innerHTML='<div class="b-user">'+h+'</div>';c.appendChild(row);}
 function addAdriBubble(text,cards,rutina){
   const c=document.getElementById('chat-msgs');
   const row=document.createElement('div');row.className='msg-row';
-  row.innerHTML=`<div class="av">A</div><div class="b-adri">${fmt(text)}</div>`;
+  row.innerHTML='<div class="av">A</div><div class="b-adri">'+fmt(text)+'</div>';
   c.appendChild(row);
   if(cards.length){const b=document.createElement('div');b.innerHTML=renderCards(cards,'39px');c.appendChild(b);}
-
-  // Always show save + WA share buttons — use rutina if available, else use full response text
-  const contentToSave = rutina || text;
-  const rb=document.createElement('div');
-  rb.className='rutina-actions';
-  rb.style.cssText='margin-left:39px;margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;';
-  rb.innerHTML=`
-    <button class="btn-p" style="font-size:10px;padding:9px 16px" onclick="saveRutinaManual(this)">
-      <svg style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline;vertical-align:middle;margin-right:5px" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-      Guardar rutina
-    </button>
-    <button class="btn-o" style="font-size:10px;padding:9px 16px" onclick="shareRutinaWA(this)">
-      <svg style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline;vertical-align:middle;margin-right:5px" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
-      Enviar por WhatsApp
-    </button>`;
-  rb.dataset.rutina=contentToSave;
+  const content=rutina||text;
+  const rb=document.createElement('div');rb.className='rutina-actions';rb.dataset.rutina=content;
+  rb.innerHTML='<button class="btn-p" style="font-size:10px;padding:9px 16px" onclick="saveRutinaManual(this)">Guardar y enviar a WhatsApp</button><button class="btn-o" style="font-size:10px;padding:9px 16px" onclick="shareRutinaWA(this)">Solo enviar por WhatsApp</button>';
   c.appendChild(rb);
-
+  const fb=document.createElement('div');fb.className='feedback-card';
+  fb.innerHTML='<div class="feedback-label">Tu opinion</div><div class="feedback-question">Como te sentiste con tu analisis, '+uName+'?</div><div class="feedback-options"><button class="fb-opt" onclick="selectFeedback(this,\'Excelente\')">Excelente</button><button class="fb-opt" onclick="selectFeedback(this,\'Muy bien\')">Muy bien</button><button class="fb-opt" onclick="selectFeedback(this,\'Bien\')">Bien</button><button class="fb-opt" onclick="selectFeedback(this,\'Necesito mas ayuda\')">Necesito mas ayuda</button></div><textarea class="feedback-textarea" placeholder="Algo que quieras contarme? (opcional)"></textarea><button class="btn-p" style="font-size:10px;padding:9px 18px;width:100%" onclick="sendFeedback(this)">Enviar a Adriana</button>';
+  c.appendChild(fb);
   const wa=document.createElement('div');wa.className='wa-wrap';
-  wa.innerHTML=`
-    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-      <a href="${WA}" target="_blank" class="wa-cta">Reservar Mi Cita →</a>
-      <a href="https://wa.me/17862538501?text=Hola%20Adriana!%20Quiero%20reservar%20mi%20consulta%201%3A1%20de%20skincare%20por%20%2417%20de%20lanzamiento." target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--bord);color:var(--mid);font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:10px 16px;border-radius:2px;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--bord)';this.style.color='var(--mid)'">
-        Consulta 1:1 · $17
-      </a>
-    </div>
-    <p class="wa-note">Miami · Facial clínico · Consulta personalizada con tus productos</p>`;
+  wa.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap;"><a href="'+WA+'" target="_blank" class="wa-cta">Reservar Mi Cita</a><a href="https://wa.me/17862538501?text=Hola%20Adriana!%20Quiero%20reservar%20mi%20consulta%201%3A1%20a%20%2417%20de%20lanzamiento." target="_blank" style="display:inline-block;background:transparent;color:var(--mid);font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px;border-radius:2px;border:1.5px solid var(--bord);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor=\'var(--gold)\';this.style.color=\'var(--gold)\'" onmouseout="this.style.borderColor=\'var(--bord)\';this.style.color=\'var(--mid)\'">Consulta 1:1 - $17</a></div><p class="wa-note">Miami - Oferta de lanzamiento - Solo primeras 10 clientas</p>';
   c.appendChild(wa);
 }
-
-function saveRutinaManual(btn){
-  const rutina=btn.closest('.rutina-actions').dataset.rutina;
-  if(!rutina)return;
-  saveRutina(rutina);
-  btn.textContent='✦ Guardada';
-  btn.disabled=true;
-  btn.style.opacity='0.6';
-  toast('✦ Rutina guardada en Mi Rutina');
-}
-
-function shareRutinaWA(btn){
-  const rutina=btn.closest('.rutina-actions').dataset.rutina;
-  if(!rutina)return;
-  // Strip HTML tags and limit length
-  const clean=rutina.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').substring(0,1500);
-  const msg=encodeURIComponent(`✦ Mi rutina personalizada por Adri\nAdriana Beauty Studios · Miami\n\n${clean}\n\n─\nCreada en: adri-analyzer1.vercel.app`);
-  // Opens WhatsApp — user can send to themselves or anyone
-  window.open(`https://wa.me/?text=${msg}`,'_blank');
-  toast('✦ Abriendo WhatsApp...');
-}
-
-function addTyping(){
-  const c=document.getElementById('chat-msgs'),id='t'+Date.now(),row=document.createElement('div');
-  row.className='msg-row';row.id=id;
-  row.innerHTML=`<div class="av">A</div><div class="b-adri"><div class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="typing-txt">Analizando...</span></div></div>`;
-  c.appendChild(row);return id;
-}
-
+function selectFeedback(btn,val){btn.closest('.feedback-options').querySelectorAll('.fb-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');btn.dataset.val=val;}
+function sendFeedback(btn){const card=btn.closest('.feedback-card');const selected=card.querySelector('.fb-opt.selected');if(!selected){toast('Selecciona una opcion');return;}const rating=selected.dataset.val||selected.textContent;const comment=card.querySelector('.feedback-textarea').value.trim();const msg=encodeURIComponent('Feedback de '+uName+'\nCalificacion: '+rating+(comment?'\nComentario: '+comment:''));window.open('https://wa.me/17862538501?text='+msg,'_blank');card.innerHTML='<div style="text-align:center;padding:12px 0;font-size:13px;color:var(--mid);font-family:\'Cormorant Garamond\',serif;font-style:italic;">Gracias, '+uName+'. Tu opinion es muy importante.</div>';toast('Feedback enviado');}
+function shareRutinaWA(btn){const rutina=btn.closest('.rutina-actions').dataset.rutina;if(!rutina)return;const clean=rutina.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').substring(0,1500);const msg=encodeURIComponent('Mi rutina personalizada por Adri\nAdriana Beauty Studios - Volver a Ti\n\n'+clean+'\n\nadri-analyzer1.vercel.app');window.open('https://wa.me/?text='+msg,'_blank');toast('Abriendo WhatsApp...');}
+function addTyping(){const c=document.getElementById('chat-msgs'),id='t'+Date.now(),row=document.createElement('div');row.className='msg-row';row.id=id;row.innerHTML='<div class="av">A</div><div class="b-adri"><div class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="typing-txt">Analizando...</span></div></div>';c.appendChild(row);return id;}
 function removeTyping(id){document.getElementById(id)?.remove();}
 function scrollBot(){setTimeout(()=>{const c=document.getElementById('chat-msgs');c.scrollTop=c.scrollHeight;},80);}
-
-function renderCards(cards,ml='39px'){
-  return`<div class="cards-block" style="margin-left:${ml}"><div class="cards-lbl"><span class="gline"></span>Productos recomendados</div><div class="cards-row">${cards.map(c=>`<a href="${c.url}" target="_blank" class="pc"><div class="pc-star">✦</div><div class="pc-name">${esc(c.name)}</div><p class="pc-reason">${esc(c.reason)}</p><div class="pc-cta">Ver en Amazon →</div></a>`).join('')}</div></div>`;
-}
-
+function renderCards(cards,ml){return'<div class="cards-block" style="margin-left:'+ml+'"><div class="cards-lbl"><span class="gline"></span>Productos recomendados</div><div class="cards-row">'+cards.map(c=>'<a href="'+c.url+'" target="_blank" class="pc"><div class="pc-star">*</div><div class="pc-name">'+esc(c.name)+'</div><p class="pc-reason">'+esc(c.reason)+'</p><div class="pc-cta">Ver en Amazon</div></a>').join('')+'</div></div>';}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function fmt(t){
-  return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>')
-    .replace(/^### (.*?)$/gm,'<h4>$1</h4>').replace(/^## (.*?)$/gm,'<h3>$1</h3>').replace(/^# (.*?)$/gm,'<h2>$1</h2>')
-    .replace(/^[-•] (.*?)$/gm,'<li>$1</li>').replace(/(<li>[\s\S]*?<\/li>\n?)+/g,m=>`<ul>${m}</ul>`)
-    .replace(/\n\n/g,'<br/><br/>').replace(/\n/g,'<br/>');
-}
+function fmt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/^### (.*?)$/gm,'<h4>$1</h4>').replace(/^## (.*?)$/gm,'<h3>$1</h3>').replace(/^# (.*?)$/gm,'<h2>$1</h2>').replace(/^[-]  (.*?)$/gm,'<li>$1</li>').replace(/(<li>[\s\S]*?<\/li>\n?)+/g,m=>'<ul>'+m+'</ul>').replace(/\n\n/g,'<br/><br/>').replace(/\n/g,'<br/>');}
 </script>
 </body>
 </html>
