@@ -8,32 +8,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#ECEAE6;--surf:#F5F3EF;--white:#FDFCFA;--black:#1C1713;--gold:#B8975A;--mid:#6B5B48;--light:#9A8870;--bord:#D8D0C4;--bord2:#EAE4DC;}
+:root{--bg:#FAF8F6;--surf:#F2EDF0;--white:#FFFFFF;--black:#1A1A1A;--gold:#C9A96E;--gold2:#E8D5A3;--mid:#8A6A7A;--light:#9A8090;--bord:#DDD0D8;--bord2:#EDE4E8;--malva:#C4A8B8;--malva-dark:#8A6A7A;}
 html,body{height:100%;background:var(--bg);color:var(--black);font-family:'DM Sans',sans-serif;}
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--black);color:var(--surf);font-size:11.5px;letter-spacing:0.06em;padding:12px 24px;border-radius:2px;opacity:0;transition:all 0.35s;z-index:999;white-space:nowrap;pointer-events:none;}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 #onboarding{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100;padding:24px;animation:fadeIn 0.6s ease;}
-.ob-card{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:52px 44px;max-width:400px;width:100%;text-align:center;box-shadow:0 8px 48px rgba(80,60,30,0.09);animation:slideUp 0.6s ease;}
-.ob-mono{width:56px;height:56px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;color:var(--surf);}
+.ob-card{background:var(--white);border:1px solid var(--bord);border-top:3px solid var(--gold);border-radius:4px;padding:52px 44px;max-width:400px;width:100%;text-align:center;box-shadow:0 8px 48px rgba(138,106,122,0.12);animation:slideUp 0.6s ease;}
+.ob-mono{width:56px;height:56px;background:var(--malva-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;color:#FFFFFF;}
 .ob-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:4px;}
 .ob-sub{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--gold);margin-bottom:22px;}
 .ob-text{font-size:13.5px;color:var(--mid);line-height:1.78;margin-bottom:28px;}
 .ob-input{width:100%;background:var(--bg);border:1.5px solid var(--bord);border-radius:2px;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--black);outline:none;margin-bottom:13px;transition:border-color 0.2s;text-align:center;}
 .ob-input:focus{border-color:var(--gold);}.ob-input::placeholder{color:var(--light);}
-.ob-btn{width:100%;background:var(--black);color:var(--surf);border:none;border-radius:2px;padding:14px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
-.ob-btn:hover{background:#3A2E24;}
+.ob-btn{width:100%;background:var(--malva-dark);color:#FFFFFF;border:none;border-radius:2px;padding:14px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
+.ob-btn:hover{background:#C9A96E;}
 #app{display:flex;flex-direction:column;height:100dvh;max-width:720px;margin:0 auto;background:var(--bg);}
-.vat-strip{background:var(--black);color:var(--surf);text-align:center;padding:9px 18px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;flex-shrink:0;}
-.vat-strip span{color:var(--gold);}
+.vat-strip{background:linear-gradient(90deg,#1A1A1A 0%,#2a1f2a 50%,#1A1A1A 100%);color:#E8D5A3;text-align:center;padding:9px 18px;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;flex-shrink:0;}
+.vat-strip span{color:#C9A96E;}
 header{background:var(--bg);border-bottom:1px solid var(--bord);padding:0 18px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;flex-shrink:0;}
 .brand{display:flex;align-items:center;gap:10px;}
-.brand-mono{width:32px;height:32px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--surf);flex-shrink:0;}
+.brand-mono{width:32px;height:32px;background:var(--malva-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#FFFFFF;flex-shrink:0;}
 .brand-text{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--black);}
 .brand-text .dot{color:var(--gold);}
 .header-right{display:flex;align-items:center;gap:10px;}
 #greeting{font-size:11px;color:var(--light);letter-spacing:0.06em;}
-.btn-res{background:var(--black);color:var(--surf);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:9px 14px;border-radius:2px;text-decoration:none;transition:background 0.2s;white-space:nowrap;}
-.btn-res:hover{background:#3A2E24;}
+.btn-res{background:var(--gold);color:#1A1A1A;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:9px 14px;border-radius:2px;text-decoration:none;transition:background 0.2s;white-space:nowrap;}
+.btn-res:hover{background:var(--malva-dark);color:#FFFFFF;}
 #nav{display:flex;background:var(--bg);border-bottom:1px solid var(--bord);overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
 #nav::-webkit-scrollbar{display:none;}
 .nav-btn{flex-shrink:0;background:transparent;border:none;border-bottom:2px solid transparent;padding:10px 13px;font-size:9.5px;font-family:'DM Sans',sans-serif;color:var(--light);cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:4px;}
@@ -53,12 +53,12 @@ header{background:var(--bg);border-bottom:1px solid var(--bord);padding:0 18px;h
 .w-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;margin-bottom:6px;}
 .w-sub{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;color:var(--gold);margin-bottom:16px;}
 .w-greeting{font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:22px;font-style:italic;}
-.w-btn{display:inline-block;background:var(--black);color:var(--surf);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:13px 28px;border-radius:2px;border:none;cursor:pointer;transition:background 0.2s;}
-.w-btn:hover{background:#3A2E24;}
+.w-btn{display:inline-block;background:var(--gold);color:#1A1A1A;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:13px 28px;border-radius:2px;border:none;cursor:pointer;transition:background 0.2s;}
+.w-btn:hover{background:var(--malva-dark);color:#FFFFFF;}
 .msg-row{display:flex;align-items:flex-end;gap:9px;animation:fadeUp 0.25s ease;}
 .msg-row.user{justify-content:flex-end;}
-.av{width:30px;height:30px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--surf);flex-shrink:0;}
-.b-user{background:var(--black);color:var(--surf);border-radius:14px 14px 4px 14px;padding:11px 15px;max-width:72%;font-size:14px;line-height:1.6;}
+.av{width:30px;height:30px;background:var(--malva-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:#FFFFFF;flex-shrink:0;}
+.b-user{background:var(--malva-dark);color:#FFFFFF;border-radius:14px 14px 4px 14px;padding:11px 15px;max-width:72%;font-size:14px;line-height:1.6;}
 .b-adri{background:var(--white);border:1px solid var(--bord);border-radius:14px 14px 14px 4px;padding:15px 17px;max-width:82%;font-size:13.5px;line-height:1.82;box-shadow:0 2px 8px rgba(80,60,30,0.06);}
 .b-adri h2{font-family:'Cormorant Garamond',serif;font-size:16px;margin:10px 0 4px;}
 .b-adri h3{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin:10px 0 4px;}
@@ -66,9 +66,11 @@ header{background:var(--bg);border-bottom:1px solid var(--bord);padding:0 18px;h
 .b-adri ul{padding-left:15px;margin:4px 0 6px;}
 .b-adri li{margin-bottom:4px;color:var(--mid);line-height:1.65;}
 .b-adri strong{color:var(--black);font-weight:600;}.b-adri em{color:var(--gold);font-style:italic;}
+.b-adri a.prod-link{color:var(--gold);text-decoration:underline;font-weight:500;}
+.b-adri a.prod-link:hover{color:var(--black);}
 .msg-img{max-width:100%;border-radius:8px;margin-bottom:8px;display:block;}
 .typing{display:flex;align-items:center;gap:4px;padding:3px 0;}
-.dot{display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 1.4s infinite ease-in-out;}
+.dot{display:inline-block;width:6px;height:6px;background:var(--malva);border-radius:50%;animation:pulse 1.4s infinite ease-in-out;}
 .dot:nth-child(2){animation-delay:.22s}.dot:nth-child(3){animation-delay:.44s}
 .typing-txt{margin-left:8px;font-size:12px;color:var(--light);}
 .cards-block{margin-left:39px;margin-top:10px;}
@@ -81,8 +83,8 @@ header{background:var(--bg);border-bottom:1px solid var(--bord);padding:0 18px;h
 .pc-reason{font-size:11px;color:var(--light);line-height:1.4;flex:1;}.pc-cta{font-size:10.5px;color:var(--gold);letter-spacing:0.06em;font-weight:500;}
 .rutina-actions{margin-left:39px;margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;}
 .wa-wrap{margin-left:39px;margin-top:10px;margin-bottom:4px;}
-.wa-cta{display:inline-block;background:var(--black);color:var(--surf);font-size:10.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:11px 22px;border-radius:2px;text-decoration:none;transition:background 0.2s;}
-.wa-cta:hover{background:#3A2E24;}
+.wa-cta{display:inline-block;background:var(--gold);color:#1A1A1A;font-size:10.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:11px 22px;border-radius:2px;text-decoration:none;transition:background 0.2s;}
+.wa-cta:hover{background:var(--malva-dark);color:#FFFFFF;}
 .wa-note{font-size:10.5px;color:var(--light);margin-top:6px;}
 .vat-tag{font-size:10px;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-top:16px;padding-top:14px;border-top:1px solid var(--bord2);text-align:center;}
 .feedback-card{background:var(--white);border:1px solid var(--bord);border-radius:4px;padding:20px;margin-left:39px;margin-top:12px;}
@@ -104,8 +106,8 @@ header{background:var(--bg);border-bottom:1px solid var(--bord);padding:0 18px;h
 .photo-btn:hover{opacity:0.85;}
 #msg-in{flex:1;background:transparent;border:none;outline:none;resize:none;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--black);line-height:1.5;max-height:100px;overflow-y:auto;}
 #msg-in::placeholder{color:#B8A898;}
-.send-btn{width:33px;height:33px;background:var(--black);color:var(--surf);border:none;border-radius:2px;font-size:14px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.2s,transform 0.15s;}
-.send-btn:hover:not(:disabled){transform:scale(1.07);}.send-btn:disabled{opacity:0.3;cursor:default;}
+.send-btn{width:33px;height:33px;background:var(--gold);color:#1A1A1A;border:none;border-radius:2px;font-size:14px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.2s,transform 0.15s;}
+.send-btn:hover:not(:disabled){transform:scale(1.07);background:var(--malva-dark);color:#FFFFFF;}.send-btn:disabled{opacity:0.3;cursor:default;}
 .disc{text-align:center;font-size:10px;color:var(--light);margin-top:6px;}
 .privacy-notice{background:var(--white);border:1px solid var(--bord2);border-radius:4px;padding:16px 18px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px;}
 .privacy-text{font-size:12.5px;color:var(--mid);line-height:1.7;}
@@ -131,11 +133,12 @@ header{background:var(--bg);border-bottom:1px solid var(--bord);padding:0 18px;h
 .rut-content ul{padding-left:15px;margin:4px 0 8px;}
 .rut-content li{margin-bottom:4px;color:var(--mid);line-height:1.65;}
 .rut-content strong{color:var(--black);}
+.rut-content a.prod-link{color:var(--gold);text-decoration:underline;font-weight:500;}
 .empty{text-align:center;padding:56px 20px;}
 .empty svg{width:38px;height:38px;stroke:var(--bord);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 16px;display:block;}
 .empty-text{font-size:14px;color:var(--light);line-height:1.7;margin-bottom:18px;}
-.btn-p{display:inline-block;background:var(--black);color:var(--surf);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:11px 22px;border-radius:2px;border:none;cursor:pointer;text-decoration:none;transition:background 0.2s;}
-.btn-p:hover{background:#3A2E24;}
+.btn-p{display:inline-block;background:var(--gold);color:#1A1A1A;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:11px 22px;border-radius:2px;border:none;cursor:pointer;text-decoration:none;transition:background 0.2s;}
+.btn-p:hover{background:var(--malva-dark);color:#FFFFFF;}
 .btn-o{display:inline-block;background:transparent;color:var(--black);font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px;border-radius:2px;border:1.5px solid var(--bord);cursor:pointer;text-decoration:none;transition:all 0.2s;}
 .btn-o:hover{border-color:var(--gold);color:var(--gold);}
 .promo-badge{background:var(--gold);color:var(--black);font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:2px;display:inline-block;margin-bottom:10px;}
@@ -294,7 +297,13 @@ const PRODS=[
   {name:"Aquaphor Healing Ointment",url:"https://amzn.to/4cERO3R",cat:"Tratamiento"},
   {name:"Laneige Lip Sleeping Mask",url:"https://amzn.to/4t8B1uW",cat:"Labios"},
   {name:"Summer Fridays Lip Butter Balm",url:"https://amzn.to/4w6Pzhx",cat:"Labios"},
-  {name:"Producto especial Adri",url:"https://amzn.to/4u9Sl3u",cat:"Especial"}
+  {name:"Producto especial Adri",url:"https://amzn.to/4u9Sl3u",cat:"Especial"},
+  {name:"EltaMD UV Clear SPF 46",url:"https://amzn.to/4dGGCTG",cat:"Protector Solar"},
+  {name:"La Roche-Posay Anthelios Melt-in Milk SPF 100",url:"https://amzn.to/4tRjKHc",cat:"Protector Solar"},
+  {name:"Supergoop Unseen Sunscreen SPF 40",url:"https://amzn.to/4v81OJr",cat:"Protector Solar"},
+  {name:"Neutrogena Ultra Sheer SPF 100",url:"https://amzn.to/4f0GsJ0",cat:"Protector Solar"},
+  {name:"Black Girl Sunscreen SPF 30",url:"https://amzn.to/4dn1iRH",cat:"Protector Solar"},
+  {name:"CeraVe Hydrating Mineral Sunscreen SPF 50",url:"https://amzn.to/42JVdsq",cat:"Protector Solar"}
 ];
 const PJ=JSON.stringify(PRODS.map(p=>({name:p.name,url:p.url,category:p.cat})));
 let uName='',chatHist=[],curImg=null,selfieImg=null;
@@ -306,19 +315,19 @@ function startApp(){const n=document.getElementById('name-in').value.trim();if(!
 function init(){document.getElementById('greeting').textContent=uName;document.getElementById('w-greeting').textContent=getGreeting();const saved=load('chat');if(saved)chatHist=saved;renderProds();}
 window.addEventListener('DOMContentLoaded',()=>{const n=load('name');if(n){uName=n;document.getElementById('onboarding').style.display='none';document.getElementById('app').style.display='flex';init();}});
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('sc-'+id).classList.add('active');document.getElementById('nb-'+id).classList.add('active');if(id==='rutina')renderRutina();if(id==='historial')renderHistorial();}
-function sys(){return'Eres Adri, asesora experta en skincare de Adriana Beauty Studios, esthetician certificada con mas de 10 anos en Miami. Formas parte de Volver a Ti de Adriana Beauty Studios.\nLa clienta se llama '+uName+'. Llamala SIEMPRE por su nombre. NUNCA uses hermosa, amor, guapa, bonita. Trato profesional, calido y elegante. Sin emojis.\nCATALOGO, recomienda SIEMPRE estos primero: '+PJ+'\nIncluye: 1)Analisis 2)Diagnostico 3)Rutina AM y PM 4)Guia de uso 5)Combinaciones.\nAl final: PRODUCT_CARDS:[{"name":"nombre","url":"url","reason":"razon"}] max 5.\nSi generas rutina completa incluye: SAVE_RUTINA:[texto completo]\nCierra: "'+uName+', quieres resultados mas profundos? Reserva tu consulta 1:1 conmigo, precio de lanzamiento $17 para las primeras 10 clientas."\nEspanol. Elegante. Concisa.';}
+function sys(){return'Eres Adri, asesora experta en skincare de Adriana Beauty Studios, esthetician certificada con mas de 10 anos en Miami. Formas parte de Volver a Ti de Adriana Beauty Studios.\nLa clienta se llama '+uName+'. Llamala SIEMPRE por su nombre. NUNCA uses hermosa, amor, guapa, bonita. Trato profesional, calido y elegante. Sin emojis.\nCATALOGO, recomienda SIEMPRE estos primero: '+PJ+'\nIMPORTANTE: En la rutina de la MANANA siempre incluye un protector solar como ULTIMO paso. Elige el mas adecuado segun el tipo de piel de la clienta entre los protectores solares del catalogo.\nCuando menciones un producto de la rutina, incluye su link de Amazon en este formato: [nombre del producto](url). Esto aplica tanto en la rutina AM como PM.\nIncluye: 1)Analisis 2)Diagnostico 3)Rutina AM y PM con links clickeables 4)Guia de uso 5)Combinaciones.\nAl final: PRODUCT_CARDS:[{"name":"nombre","url":"url","reason":"razon"}] max 5.\nSi generas rutina completa incluye: SAVE_RUTINA:[texto completo]\nCierra: "'+uName+', quieres resultados mas profundos? Reserva tu consulta 1:1 conmigo, precio de lanzamiento $17 para las primeras 10 clientas."\nEspanol. Elegante. Concisa.';}
 async function api(msgs){const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:1000,system:sys(),messages:msgs})});const d=await r.json();return d.content?.map(b=>b.text||'').join('')||'No pude completar el analisis. Intenta de nuevo.';}
 function parseAll(raw){let text=raw,cards=[],rutina=null;const cm=raw.match(/PRODUCT_CARDS:(\[[\s\S]*?\])/);if(cm){try{cards=JSON.parse(cm[1])}catch{};text=text.replace(/PRODUCT_CARDS:\[[\s\S]*?\]/,'').trim();}const rm=text.match(/SAVE_RUTINA:\[([\s\S]*?)\]/);if(rm){rutina=rm[1].trim();text=text.replace(/SAVE_RUTINA:\[[\s\S]*?\]/,'').trim();}return{text,cards,rutina};}
 async function sendChat(){const inp=document.getElementById('msg-in');const txt=inp.value.trim();if(!txt&&!curImg)return;document.getElementById('welcome-block')?.remove();const imgB=curImg?{...curImg}:null;addUserBubble(txt,imgB);const uc=curImg?[{type:'image',source:{type:'base64',media_type:curImg.type,data:curImg.data}},{type:'text',text:txt||'Analiza mi piel.'}]:txt;chatHist.push({role:'user',content:uc});inp.value='';inp.style.height='auto';removeImg();document.getElementById('send-btn').disabled=true;const tid=addTyping();scrollBot();try{const raw=await api(chatHist);const{text,cards,rutina}=parseAll(raw);if(rutina)saveRutina(rutina);chatHist.push({role:'assistant',content:text});save('chat',chatHist.slice(-20));removeTyping(tid);addAdriBubble(text,cards,rutina);}catch(e){removeTyping(tid);addAdriBubble('Error de conexion. Por favor intenta de nuevo.',[],null);}scrollBot();}
 function dropChat(e){e.preventDefault();document.getElementById('ibox').classList.remove('drag');handleFile(e.dataTransfer.files[0],'chat');}
 function dropSelfie(e){e.preventDefault();document.getElementById('sz-selfie').classList.remove('drag');handleFile(e.dataTransfer.files[0],'selfie');}
-async function analyzeSelfie(){if(!selfieImg)return;show('chat');document.getElementById('welcome-block')?.remove();addUserBubble('Analiza mi piel con esta foto.',{...selfieImg});const uc=[{type:'image',source:{type:'base64',media_type:selfieImg.type,data:selfieImg.data}},{type:'text',text:'Analiza mi tipo de piel con esta foto y dame una rutina completa. Incluye SAVE_RUTINA.'}];chatHist.push({role:'user',content:uc});const tid=addTyping();scrollBot();try{const raw=await api(chatHist);const{text,cards,rutina}=parseAll(raw);if(rutina)saveRutina(rutina);chatHist.push({role:'assistant',content:text});save('chat',chatHist.slice(-20));removeTyping(tid);addAdriBubble(text,cards,rutina);}catch(e){removeTyping(tid);addAdriBubble('Error de conexion.',[],null);}scrollBot();}
+async function analyzeSelfie(){if(!selfieImg)return;show('chat');document.getElementById('welcome-block')?.remove();addUserBubble('Analiza mi piel con esta foto.',{...selfieImg});const uc=[{type:'image',source:{type:'base64',media_type:selfieImg.type,data:selfieImg.data}},{type:'text',text:'Analiza mi tipo de piel con esta foto y dame una rutina completa con links de Amazon para cada producto. Incluye SAVE_RUTINA.'}];chatHist.push({role:'user',content:uc});const tid=addTyping();scrollBot();try{const raw=await api(chatHist);const{text,cards,rutina}=parseAll(raw);if(rutina)saveRutina(rutina);chatHist.push({role:'assistant',content:text});save('chat',chatHist.slice(-20));removeTyping(tid);addAdriBubble(text,cards,rutina);}catch(e){removeTyping(tid);addAdriBubble('Error de conexion.',[],null);}scrollBot();}
 function handleFile(file,ctx){if(!file||!file.type.startsWith('image/'))return;const img=new Image(),objUrl=URL.createObjectURL(file);img.onload=()=>{URL.revokeObjectURL(objUrl);const canvas=document.createElement('canvas');const MAX=1024;let w=img.width,h=img.height;if(w>MAX||h>MAX){if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;}}canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);const c=canvas.toDataURL('image/jpeg',0.75);const d={data:c.split(',')[1],type:'image/jpeg',src:c};if(ctx==='chat'){curImg=d;document.getElementById('prev-img').src=c;document.getElementById('prev-row').style.display='block';updBtn();}else if(ctx==='selfie'){selfieImg=d;const p=document.getElementById('sf-prev');p.src=c;p.style.display='block';document.getElementById('sf-act').style.display='block';}};img.src=objUrl;}
 function removeImg(){curImg=null;document.getElementById('prev-row').style.display='none';document.getElementById('cf').value='';updBtn();}
 function updBtn(){document.getElementById('send-btn').disabled=!document.getElementById('msg-in').value.trim()&&!curImg;}
 function resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';updBtn();}
 function saveRutina(text){const rs=load('rutinas')||[];rs.unshift({date:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'}),text,id:Date.now()});save('rutinas',rs.slice(0,10));save('cur-rutina',text);}
-function saveRutinaManual(btn){const rutina=btn.closest('.rutina-actions').dataset.rutina;if(!rutina)return;saveRutina(rutina);btn.textContent='Guardada';btn.disabled=true;btn.style.opacity='0.6';toast('Guardada, abriendo WhatsApp...');setTimeout(()=>{const clean=rutina.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').substring(0,1500);const msg=encodeURIComponent('Mi rutina personalizada por Adri\nAdriana Beauty Studios - Volver a Ti\n\n'+clean+'\n\nadri-analyzer1.vercel.app');window.open('https://wa.me/?text='+msg,'_blank');},800);}
+function saveRutinaManual(btn){const rutina=btn.closest('.rutina-actions').dataset.rutina;if(!rutina)return;saveRutina(rutina);btn.textContent='Guardada';btn.disabled=true;btn.style.opacity='0.6';toast('Guardada, abriendo WhatsApp...');setTimeout(()=>{const clean=rutina.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').substring(0,1500);const msg=encodeURIComponent('Mi rutina personalizada por Adri\nAdriana Beauty Studios - Volver a Ti\n\n'+clean+'\n\nadri-analyzer.vercel.app');window.open('https://wa.me/?text='+msg,'_blank');},800);}
 function renderRutina(){const r=load('cur-rutina'),el=document.getElementById('rut-content');if(!r){el.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><p class="empty-text">Aun no tienes una rutina guardada, '+uName+'.<br>Cuentame sobre tu piel y Adri creara tu rutina personalizada.</p><button class="btn-p" onclick="show(\'chat\')">Hablar con Adri</button></div>';return;}el.innerHTML='<div class="rut-content">'+fmt(r)+'<div class="vat-tag">Este es tu momento. Volver a Ti empieza aqui.</div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><a href="'+WA+'" target="_blank" class="btn-p">Reservar cita</a><button class="btn-o" onclick="show(\'chat\')">Actualizar rutina</button></div>';}
 function renderHistorial(){const rs=load('rutinas')||[],el=document.getElementById('hist-content');if(!rs.length){el.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg><p class="empty-text">Aqui apareceran tus rutinas anteriores, '+uName+'.</p><button class="btn-p" onclick="show(\'chat\')">Crear mi primera rutina</button></div>';return;}el.innerHTML=rs.map((r,i)=>'<div class="rut-card"><div class="rut-card-title">'+(i===0?'Rutina actual':'Rutina #'+(rs.length-i))+'</div><div class="rut-card-date">'+r.date+'</div><div class="rut-card-preview">'+esc(r.text.substring(0,120))+'...</div><div class="rut-card-actions"><button class="btn-o" onclick="viewHist('+i+')" style="font-size:10px;padding:8px 14px">Ver completa</button><button class="btn-o" onclick="useHist('+i+')" style="font-size:10px;padding:8px 14px">Usar esta</button></div></div>').join('');}
 function viewHist(i){const rs=load('rutinas')||[];if(!rs[i])return;document.getElementById('hist-content').innerHTML='<button class="btn-o" onclick="renderHistorial()" style="margin-bottom:14px;font-size:10px;padding:8px 14px">Volver</button><div class="rut-content">'+fmt(rs[i].text)+'<div class="vat-tag">Este es tu momento. Volver a Ti empieza aqui.</div></div>';}
@@ -344,13 +353,13 @@ function addAdriBubble(text,cards,rutina){
 }
 function selectFeedback(btn,val){btn.closest('.feedback-options').querySelectorAll('.fb-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');btn.dataset.val=val;}
 function sendFeedback(btn){const card=btn.closest('.feedback-card');const selected=card.querySelector('.fb-opt.selected');if(!selected){toast('Selecciona una opcion');return;}const rating=selected.dataset.val||selected.textContent;const comment=card.querySelector('.feedback-textarea').value.trim();const msg=encodeURIComponent('Feedback de '+uName+'\nCalificacion: '+rating+(comment?'\nComentario: '+comment:''));window.open('https://wa.me/17862538501?text='+msg,'_blank');card.innerHTML='<div style="text-align:center;padding:12px 0;font-size:13px;color:var(--mid);font-family:\'Cormorant Garamond\',serif;font-style:italic;">Gracias, '+uName+'. Tu opinion es muy importante.</div>';toast('Feedback enviado');}
-function shareRutinaWA(btn){const rutina=btn.closest('.rutina-actions').dataset.rutina;if(!rutina)return;const clean=rutina.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').substring(0,1500);const msg=encodeURIComponent('Mi rutina personalizada por Adri\nAdriana Beauty Studios - Volver a Ti\n\n'+clean+'\n\nadri-analyzer1.vercel.app');window.open('https://wa.me/?text='+msg,'_blank');toast('Abriendo WhatsApp...');}
+function shareRutinaWA(btn){const rutina=btn.closest('.rutina-actions').dataset.rutina;if(!rutina)return;const clean=rutina.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').substring(0,1500);const msg=encodeURIComponent('Mi rutina personalizada por Adri\nAdriana Beauty Studios - Volver a Ti\n\n'+clean+'\n\nadri-analyzer.vercel.app');window.open('https://wa.me/?text='+msg,'_blank');toast('Abriendo WhatsApp...');}
 function addTyping(){const c=document.getElementById('chat-msgs'),id='t'+Date.now(),row=document.createElement('div');row.className='msg-row';row.id=id;row.innerHTML='<div class="av">A</div><div class="b-adri"><div class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="typing-txt">Analizando...</span></div></div>';c.appendChild(row);return id;}
 function removeTyping(id){document.getElementById(id)?.remove();}
 function scrollBot(){setTimeout(()=>{const c=document.getElementById('chat-msgs');c.scrollTop=c.scrollHeight;},80);}
 function renderCards(cards,ml){return'<div class="cards-block" style="margin-left:'+ml+'"><div class="cards-lbl"><span class="gline"></span>Productos recomendados</div><div class="cards-row">'+cards.map(c=>'<a href="'+c.url+'" target="_blank" class="pc"><div class="pc-star">*</div><div class="pc-name">'+esc(c.name)+'</div><p class="pc-reason">'+esc(c.reason)+'</p><div class="pc-cta">Ver en Amazon</div></a>').join('')+'</div></div>';}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function fmt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/^### (.*?)$/gm,'<h4>$1</h4>').replace(/^## (.*?)$/gm,'<h3>$1</h3>').replace(/^# (.*?)$/gm,'<h2>$1</h2>').replace(/^[-]  (.*?)$/gm,'<li>$1</li>').replace(/(<li>[\s\S]*?<\/li>\n?)+/g,m=>'<ul>'+m+'</ul>').replace(/\n\n/g,'<br/><br/>').replace(/\n/g,'<br/>');}
+function fmt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/^### (.*?)$/gm,'<h4>$1</h4>').replace(/^## (.*?)$/gm,'<h3>$1</h3>').replace(/^# (.*?)$/gm,'<h2>$1</h2>').replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,'<a href="$2" target="_blank" rel="noreferrer" class="prod-link">$1</a>').replace(/^[-]  (.*?)$/gm,'<li>$1</li>').replace(/(<li>[\s\S]*?<\/li>\n?)+/g,m=>'<ul>'+m+'</ul>').replace(/\n\n/g,'<br/><br/>').replace(/\n/g,'<br/>');}
 </script>
 </body>
 </html>
