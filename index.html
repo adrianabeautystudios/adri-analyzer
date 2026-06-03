@@ -267,43 +267,305 @@ header{background:var(--bg);border-bottom:1px solid var(--bord);padding:0 18px;h
   </div>
   <div class="screen" id="sc-rutina"><div class="screen-inner"><div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Tu rutina</span></div><h2 class="sec-title">Mi Rutina</h2><div id="rut-content"></div></div></div>
   <div class="screen" id="sc-historial"><div class="screen-inner"><div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Rutinas anteriores</span></div><h2 class="sec-title">Historial</h2><div id="hist-content"></div></div></div>
-  <div class="screen" id="sc-productos"><div class="screen-inner"><div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Mis recomendados</span></div><h2 class="sec-title">Productos</h2><p class="sec-sub">Todo lo que uso, recomiendo y receto - Links directos a Amazon</p><div class="prod-grid" id="prod-grid"></div></div></div>
+  <div class="screen" id="sc-productos">
+  <div class="screen-inner">
+    <div style="display:flex;overflow-x:auto;gap:7px;margin-bottom:22px;padding-bottom:4px;scrollbar-width:none;">
+      <button class="btn-p" id="ptab-cero" onclick="showPTab('cero')" style="font-size:9.5px;padding:8px 14px;white-space:nowrap;">Empezar desde cero</button>
+      <button class="btn-o" id="ptab-acne" onclick="showPTab('acne')" style="font-size:9.5px;padding:8px 14px;white-space:nowrap;">Tengo acne</button>
+      <button class="btn-o" id="ptab-manchas" onclick="showPTab('manchas')" style="font-size:9.5px;padding:8px 14px;white-space:nowrap;">Tengo manchas</button>
+      <button class="btn-o" id="ptab-antiedad" onclick="showPTab('antiedad')" style="font-size:9.5px;padding:8px 14px;white-space:nowrap;">Anti-edad</button>
+      <button class="btn-o" id="ptab-tipopiel" onclick="showPTab('tipopiel')" style="font-size:9.5px;padding:8px 14px;white-space:nowrap;">Mi tipo de piel</button>
+      <button class="btn-o" id="ptab-spf" onclick="showPTab('spf')" style="font-size:9.5px;padding:8px 14px;white-space:nowrap;">SPF ligero</button>
+      <button class="btn-o" id="ptab-menos20" onclick="showPTab('menos20')" style="font-size:9.5px;padding:8px 14px;white-space:nowrap;">Menos de $20</button>
+      <button class="btn-o" id="ptab-todos" onclick="showPTab('todos')" style="font-size:9.5px;padding:8px 14px;white-space:nowrap;">Ver todo</button>
+    </div>
+    <div id="pp-cero" class="pp-panel">
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Rutina basica</span></div>
+      <h2 class="sec-title">Empezar desde cero</h2>
+      <p class="sec-sub">5 pasos esenciales que toda piel necesita</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <a href="https://amzn.to/4elsEbd" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">1 · Limpieza AM+PM</div><div class="pt-name">CeraVe Hydrating Cleanser</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4dOwrOe" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">2 · Serum hidratante</div><div class="pt-name">The Ordinary Hyaluronic Acid 2% + B5</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/439hRdZ" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">3 · Hidratante AM+PM</div><div class="pt-name">CeraVe PM Moisturizing Lotion</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/49Fd3R9" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">4 · SPF AM</div><div class="pt-name">CeraVe Hydrating Mineral Sunscreen SPF 50</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/3S4dzSJ" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">5 · Retinol PM</div><div class="pt-name">The Ordinary Retinol 0.5% in Squalane</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+      </div>
+    </div>
+    <div id="pp-acne" class="pp-panel" style="display:none;">
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Control de brotes</span></div>
+      <h2 class="sec-title">Tengo acne</h2>
+      <p class="sec-sub">Limpiar sin irritar, exfoliar sin resecar</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <a href="https://amzn.to/4o708NX" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">1 · Limpieza AM+PM</div><div class="pt-name">La Roche-Posay Effaclar Foaming Gel</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4vkHXGO" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">2 · Exfoliante 3x semana PM</div><div class="pt-name">Paula's Choice BHA 2%</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4uTLNHa" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">3 · Serum poros AM+PM</div><div class="pt-name">The Ordinary Niacinamide 10% + Zinc 1%</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4uZzFUU" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">4 · Tratamiento PM</div><div class="pt-name">Differin Adapalene Gel 0.1%</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/3Q2Ce9J" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">5 · Hidratante ligero AM+PM</div><div class="pt-name">Neutrogena Hydro Boost Gel</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4uOrnzr" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">6 · SPF no comedogenico AM</div><div class="pt-name">EltaMD UV Clear SPF 46</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4vrFb2K" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">7 · Calmante post-brote</div><div class="pt-name">La Roche-Posay Cicaplast Baume B5</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+      </div>
+    </div>
+    <div id="pp-manchas" class="pp-panel" style="display:none;">
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Hiperpigmentacion</span></div>
+      <h2 class="sec-title">Tengo manchas</h2>
+      <p class="sec-sub">El SPF es obligatorio, sin el nada funciona</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <a href="https://amzn.to/4vm3Fdr" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">1 · Vitamina C AM</div><div class="pt-name">La Roche-Posay Vitamin C12 Serum</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/3SjURGL" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">2 · Serum manchas AM+PM</div><div class="pt-name">Vichy Liftactiv Pigment Specialist B3</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4vpApmb" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">3 · Serum iluminador AM+PM</div><div class="pt-name">AXIS-Y Dark Spot Correcting Glow Serum</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4dWtiKR" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">4 · Retinal PM</div><div class="pt-name">Purito TXA 6 Niacinamide 10 Retinal Serum</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4dOOoMs" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">5 · Exfoliante 1x semana PM</div><div class="pt-name">The Ordinary Glycolic Acid 7% Toner</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4ekrrkl" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">6 · SPF alto AM (obligatorio)</div><div class="pt-name">La Roche-Posay Anthelios Melt-in Milk SPF 100</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+      </div>
+    </div>
+    <div id="pp-antiedad" class="pp-panel" style="display:none;">
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Firmeza y luminosidad</span></div>
+      <h2 class="sec-title">Quiero anti-edad</h2>
+      <p class="sec-sub">Vitamina C, retinol, peptidos y SPF en ese orden</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <a href="https://amzn.to/43cWpVw" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">1 · Vitamina C AM</div><div class="pt-name">SkinCeuticals CE Ferulic</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4fp1Nfw" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">2 · Serum peptidos AM+PM</div><div class="pt-name">COSRX The 6 Peptide Skin Booster Serum</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/43d04CK" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">3 · Hidratante AM</div><div class="pt-name">Tatcha The Water Cream</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4ekrrkl" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">4 · SPF AM (esencial)</div><div class="pt-name">La Roche-Posay Anthelios Melt-in Milk SPF 100</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4v7gxEV" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">5 · Retinol PM</div><div class="pt-name">Paula's Choice Retinol 1%</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4vkQlWO" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">6 · Crema de noche PM</div><div class="pt-name">CeraVe Skin Renewing Night Cream</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4o8HEfW" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">7 · Anti-edad AM+PM</div><div class="pt-name">Olay Regenerist Cream</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+      </div>
+    </div>
+    <div id="pp-tipopiel" class="pp-panel" style="display:none;">
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Personalizado</span></div>
+      <h2 class="sec-title">Mi tipo de piel</h2>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;">
+        <button class="btn-p" id="stab-seca" onclick="showSkinTab('seca')" style="font-size:9.5px;padding:7px 13px;">Seca</button>
+        <button class="btn-o" id="stab-grasa" onclick="showSkinTab('grasa')" style="font-size:9.5px;padding:7px 13px;">Grasa</button>
+        <button class="btn-o" id="stab-sensible" onclick="showSkinTab('sensible')" style="font-size:9.5px;padding:7px 13px;">Sensible</button>
+        <button class="btn-o" id="stab-mixta" onclick="showSkinTab('mixta')" style="font-size:9.5px;padding:7px 13px;">Mixta</button>
+      </div>
+      <div id="sp-seca">
+        <p class="sec-sub">Hidratacion profunda y barrera protectora</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://amzn.to/4elsEbd" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">1 · Limpieza AM+PM</div><div class="pt-name">CeraVe Hydrating Cleanser</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4dOwrOe" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">2 · Serum hidratante</div><div class="pt-name">The Ordinary Hyaluronic Acid 2% + B5</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4uNedT0" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">3 · Hidratante AM</div><div class="pt-name">Kiehl's Ultra Facial Cream</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/49Fd3R9" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">4 · SPF AM</div><div class="pt-name">CeraVe Hydrating Mineral Sunscreen SPF 50</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4vkQlWO" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">5 · Crema de noche PM</div><div class="pt-name">CeraVe Skin Renewing Night Cream</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4vx4PDf" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">6 · Sellador PM</div><div class="pt-name">Aquaphor Healing Ointment</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        </div>
+      </div>
+      <div id="sp-grasa" style="display:none;">
+        <p class="sec-sub">Control de sebo sin resecar</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://amzn.to/4o708NX" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">1 · Limpieza AM+PM</div><div class="pt-name">La Roche-Posay Effaclar Foaming Gel</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4fpfvyR" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">2 · Tonico exfoliante</div><div class="pt-name">COSRX AHA/BHA Clarifying Treatment Toner</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4uTLNHa" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">3 · Serum poros AM+PM</div><div class="pt-name">The Ordinary Niacinamide 10% + Zinc 1%</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/3Q2Ce9J" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">4 · Hidratante ligero AM+PM</div><div class="pt-name">Neutrogena Hydro Boost Gel</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/3RZ4R8f" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">5 · SPF sin residuo AM</div><div class="pt-name">Supergoop Unseen Sunscreen SPF 40</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4vkHXGO" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">6 · Exfoliante 2x semana PM</div><div class="pt-name">Paula's Choice BHA 2%</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        </div>
+      </div>
+      <div id="sp-sensible" style="display:none;">
+        <p class="sec-sub">Calmante, sin irritantes, barrera fuerte</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://amzn.to/4e6Rzy9" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">1 · Limpieza AM+PM</div><div class="pt-name">Vanicream Gentle Facial Cleanser</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/43JGPRh" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">2 · Desmaquillante</div><div class="pt-name">Bioderma Sensibio H2O Micellar Water</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4vwbIVs" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">3 · Serum calmante AM+PM</div><div class="pt-name">Dr. Jart+ Cicapair Tiger Grass Serum</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/43LrkIB" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">4 · Hidratante AM+PM</div><div class="pt-name">Dr. Althea 345 Relief Cream</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4uOrnzr" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">5 · SPF mineral AM</div><div class="pt-name">EltaMD UV Clear SPF 46</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4vrFb2K" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">6 · Tratamiento PM</div><div class="pt-name">La Roche-Posay Cicaplast Baume B5</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        </div>
+      </div>
+      <div id="sp-mixta" style="display:none;">
+        <p class="sec-sub">Balance entre zonas secas y grasas</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://amzn.to/4fZDRzn" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">1 · Limpieza AM+PM</div><div class="pt-name">La Roche-Posay Toleriane Hydrating Gentle Cleanser</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4fp1Nfw" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">2 · Serum equilibrante AM+PM</div><div class="pt-name">COSRX The 6 Peptide Skin Booster Serum</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4uTLNHa" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">3 · Serum zona T AM+PM</div><div class="pt-name">The Ordinary Niacinamide 10% + Zinc 1%</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/439hRdZ" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">4 · Hidratante ligero AM+PM</div><div class="pt-name">CeraVe PM Moisturizing Lotion</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4e3JM42" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">5 · SPF con tono AM</div><div class="pt-name">La Roche-Posay Anthelios Tinted Mineral SPF 50</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+          <a href="https://amzn.to/4dOOoMs" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">6 · Exfoliante 1x semana PM</div><div class="pt-name">The Ordinary Glycolic Acid 7% Toner</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        </div>
+      </div>
+    </div>
+    <div id="pp-spf" class="pp-panel" style="display:none;">
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Uso diario</span></div>
+      <h2 class="sec-title">SPF ligero</h2>
+      <p class="sec-sub">Sin residuo blanco, rapida absorcion</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <a href="https://amzn.to/4uOrnzr" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">Piel acneica o sensible</div><div class="pt-name">EltaMD UV Clear SPF 46</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/3RZ4R8f" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">Piel grasa, sin residuo</div><div class="pt-name">Supergoop Unseen Sunscreen SPF 40</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4e3JM42" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">Con tono, piel mixta</div><div class="pt-name">La Roche-Posay Anthelios Tinted Mineral SPF 50</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/3PEEofF" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">Coreano, ultra ligero</div><div class="pt-name">Purito Sun Day Adventure Sunscreen SPF 50</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/49Fd3R9" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">Piel seca, hidratante</div><div class="pt-name">CeraVe Hydrating Mineral Sunscreen SPF 50</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4ugdFUR" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">Piel oscura, sin residuo blanco</div><div class="pt-name">Black Girl Sunscreen SPF 30</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4ekrrkl" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">Maxima proteccion</div><div class="pt-name">La Roche-Posay Anthelios Melt-in Milk SPF 100</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+        <a href="https://amzn.to/4uZB6CM" target="_blank" class="pt" style="flex-direction:row;align-items:center;gap:12px;"><div><div class="pt-cat">Economico, uso diario</div><div class="pt-name">Neutrogena Ultra Sheer SPF 70</div></div><span class="pt-cta" style="margin-left:auto;flex-shrink:0;">Amazon</span></a>
+      </div>
+    </div>
+    <div id="pp-menos20" class="pp-panel" style="display:none;">
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Accesible</span></div>
+      <h2 class="sec-title">Menos de $20</h2>
+      <p class="sec-sub">El precio no define los resultados</p>
+      <div class="prod-grid">
+        <a href="https://amzn.to/4elsEbd" target="_blank" class="pt"><div class="pt-cat">Limpiador</div><div class="pt-name">CeraVe Hydrating Cleanser</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3QlGL7c" target="_blank" class="pt"><div class="pt-cat">Limpiador</div><div class="pt-name">Cetaphil Gentle Skin Cleanser</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4e6Rzy9" target="_blank" class="pt"><div class="pt-cat">Limpiador</div><div class="pt-name">Vanicream Gentle Facial Cleanser</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dOwrOe" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">The Ordinary Hyaluronic Acid 2% + B5</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uTLNHa" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">The Ordinary Niacinamide 10% + Zinc 1%</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uPsZbW" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">COSRX Snail Mucin 96%</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3RChSVn" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">TruSkin Vitamin C Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3S4dzSJ" target="_blank" class="pt"><div class="pt-cat">Retinol</div><div class="pt-name">The Ordinary Retinol 0.5% in Squalane</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uUBbbc" target="_blank" class="pt"><div class="pt-cat">Retinol</div><div class="pt-name">The Ordinary Retinal 0.2% Emulsion</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/43L1QLk" target="_blank" class="pt"><div class="pt-cat">Retinol</div><div class="pt-name">CeraVe Retinol Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3Q2Ce9J" target="_blank" class="pt"><div class="pt-cat">Hidratante</div><div class="pt-name">Neutrogena Hydro Boost Gel</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/439hRdZ" target="_blank" class="pt"><div class="pt-cat">Hidratante</div><div class="pt-name">CeraVe PM Moisturizing Lotion</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4vx4PDf" target="_blank" class="pt"><div class="pt-cat">Tratamiento</div><div class="pt-name">Aquaphor Healing Ointment</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uZzFUU" target="_blank" class="pt"><div class="pt-cat">Tratamiento</div><div class="pt-name">Differin Adapalene Gel 0.1%</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dWfvnG" target="_blank" class="pt"><div class="pt-cat">Labios</div><div class="pt-name">Aquaphor Lip Repair</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uZB6CM" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">Neutrogena Ultra Sheer SPF 70</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4ugdFUR" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">Black Girl Sunscreen SPF 30</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/49Fd3R9" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">CeraVe Hydrating Mineral Sunscreen SPF 50</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4fp9qCG" target="_blank" class="pt"><div class="pt-cat">Anti-edad</div><div class="pt-name">RoC Retinol Correxion Line Smoothing Cream</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dOOoMs" target="_blank" class="pt"><div class="pt-cat">Exfoliante</div><div class="pt-name">The Ordinary Glycolic Acid 7% Toner</div><div class="pt-cta">Amazon</div></a>
+      </div>
+    </div>
+    <div id="pp-todos" class="pp-panel" style="display:none;">
+      <div class="sec-lbl"><span class="gline"></span><span class="sec-tag">Catalogo completo</span></div>
+      <h2 class="sec-title">Todos los productos</h2>
+      <p class="sec-sub" style="margin-bottom:6px;">Limpiador</p>
+      <div class="prod-grid" style="margin-bottom:16px;">
+        <a href="https://amzn.to/4elsEbd" target="_blank" class="pt"><div class="pt-cat">Limpiador</div><div class="pt-name">CeraVe Hydrating Cleanser</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4fZDRzn" target="_blank" class="pt"><div class="pt-cat">Limpiador</div><div class="pt-name">La Roche-Posay Toleriane Hydrating Gentle Cleanser</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4o708NX" target="_blank" class="pt"><div class="pt-cat">Limpiador</div><div class="pt-name">La Roche-Posay Effaclar Foaming Gel</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3QlGL7c" target="_blank" class="pt"><div class="pt-cat">Limpiador</div><div class="pt-name">Cetaphil Gentle Skin Cleanser</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4e6Rzy9" target="_blank" class="pt"><div class="pt-cat">Limpiador</div><div class="pt-name">Vanicream Gentle Facial Cleanser</div><div class="pt-cta">Amazon</div></a>
+      </div>
+      <p class="sec-sub" style="margin-bottom:6px;">Desmaquillante</p>
+      <div class="prod-grid" style="margin-bottom:16px;">
+        <a href="https://amzn.to/4fk6ZkL" target="_blank" class="pt"><div class="pt-cat">Desmaquillante</div><div class="pt-name">Banila Co Clean It Zero Cleansing Balm</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/43JGPRh" target="_blank" class="pt"><div class="pt-cat">Desmaquillante</div><div class="pt-name">Bioderma Sensibio H2O Micellar Water</div><div class="pt-cta">Amazon</div></a>
+      </div>
+      <p class="sec-sub" style="margin-bottom:6px;">Exfoliante y Tonico</p>
+      <div class="prod-grid" style="margin-bottom:16px;">
+        <a href="https://amzn.to/4vkHXGO" target="_blank" class="pt"><div class="pt-cat">Exfoliante</div><div class="pt-name">Paula's Choice BHA 2%</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dOOoMs" target="_blank" class="pt"><div class="pt-cat">Exfoliante</div><div class="pt-name">The Ordinary Glycolic Acid 7% Toner</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4fug1Md" target="_blank" class="pt"><div class="pt-cat">Exfoliante</div><div class="pt-name">Good Genes by Sunday Riley</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4fpfvyR" target="_blank" class="pt"><div class="pt-cat">Tonico</div><div class="pt-name">COSRX AHA/BHA Clarifying Treatment Toner</div><div class="pt-cta">Amazon</div></a>
+      </div>
+      <p class="sec-sub" style="margin-bottom:6px;">Serum</p>
+      <div class="prod-grid" style="margin-bottom:16px;">
+        <a href="https://amzn.to/49EELO5" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">d'alba First Spray Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uPsZbW" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">COSRX Snail Mucin 96%</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4fp1Nfw" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">COSRX The 6 Peptide Skin Booster Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3RChSVn" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">TruSkin Vitamin C Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4vm3Fdr" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">La Roche-Posay Vitamin C12 Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4vpApmb" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">AXIS-Y Dark Spot Correcting Glow Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3SjURGL" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">Vichy Liftactiv Pigment Specialist B3</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4vwbIVs" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">Dr. Jart+ Cicapair Tiger Grass Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/43cWpVw" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">SkinCeuticals CE Ferulic</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dOwrOe" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">The Ordinary Hyaluronic Acid 2% + B5</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uTLNHa" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">The Ordinary Niacinamide 10% + Zinc 1%</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dWtiKR" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">Purito TXA 6 Niacinamide 10 Retinal Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dNxZYF" target="_blank" class="pt"><div class="pt-cat">Contorno ojos</div><div class="pt-name">COSRX Advanced Snail Peptide Eye Cream</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4oq20BH" target="_blank" class="pt"><div class="pt-cat">Serum</div><div class="pt-name">Torriden Dive-In Hyaluronic Acid Serum</div><div class="pt-cta">Amazon</div></a>
+      </div>
+      <p class="sec-sub" style="margin-bottom:6px;">Retinol</p>
+      <div class="prod-grid" style="margin-bottom:16px;">
+        <a href="https://amzn.to/43L1QLk" target="_blank" class="pt"><div class="pt-cat">Retinol</div><div class="pt-name">CeraVe Retinol Serum</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4v7gxEV" target="_blank" class="pt"><div class="pt-cat">Retinol</div><div class="pt-name">Paula's Choice Retinol 1%</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3S4dzSJ" target="_blank" class="pt"><div class="pt-cat">Retinol</div><div class="pt-name">The Ordinary Retinol 0.5% in Squalane</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4emVOXm" target="_blank" class="pt"><div class="pt-cat">Retinol</div><div class="pt-name">Celimax The Vita A Retinal Shot 0.1%</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uUBbbc" target="_blank" class="pt"><div class="pt-cat">Retinol</div><div class="pt-name">The Ordinary Retinal 0.2% Emulsion</div><div class="pt-cta">Amazon</div></a>
+      </div>
+      <p class="sec-sub" style="margin-bottom:6px;">Hidratante, Noche y Anti-edad</p>
+      <div class="prod-grid" style="margin-bottom:16px;">
+        <a href="https://amzn.to/3Q2Ce9J" target="_blank" class="pt"><div class="pt-cat">Hidratante</div><div class="pt-name">Neutrogena Hydro Boost Gel</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/439hRdZ" target="_blank" class="pt"><div class="pt-cat">Hidratante</div><div class="pt-name">CeraVe PM Moisturizing Lotion</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/43d04CK" target="_blank" class="pt"><div class="pt-cat">Hidratante</div><div class="pt-name">Tatcha The Water Cream</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uNedT0" target="_blank" class="pt"><div class="pt-cat">Hidratante</div><div class="pt-name">Kiehl's Ultra Facial Cream</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/43LrkIB" target="_blank" class="pt"><div class="pt-cat">Hidratante</div><div class="pt-name">Dr. Althea 345 Relief Cream</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3PVfOHs" target="_blank" class="pt"><div class="pt-cat">Hidratante</div><div class="pt-name">First Aid Beauty Ultra Repair Cream</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4a6mAko" target="_blank" class="pt"><div class="pt-cat">Hidratante</div><div class="pt-name">Belif The True Cream Aqua Bomb</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4vkQlWO" target="_blank" class="pt"><div class="pt-cat">Noche</div><div class="pt-name">CeraVe Skin Renewing Night Cream</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4o8HEfW" target="_blank" class="pt"><div class="pt-cat">Anti-edad</div><div class="pt-name">Olay Regenerist Cream</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4o631yt" target="_blank" class="pt"><div class="pt-cat">Anti-edad</div><div class="pt-name">Neutrogena Rapid Wrinkle Repair Cream</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4fp9qCG" target="_blank" class="pt"><div class="pt-cat">Anti-edad</div><div class="pt-name">RoC Retinol Correxion Line Smoothing Cream</div><div class="pt-cta">Amazon</div></a>
+      </div>
+      <p class="sec-sub" style="margin-bottom:6px;">Tratamiento y Labios</p>
+      <div class="prod-grid" style="margin-bottom:16px;">
+        <a href="https://amzn.to/4vrFb2K" target="_blank" class="pt"><div class="pt-cat">Tratamiento</div><div class="pt-name">La Roche-Posay Cicaplast Baume B5</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4vx4PDf" target="_blank" class="pt"><div class="pt-cat">Tratamiento</div><div class="pt-name">Aquaphor Healing Ointment</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uZzFUU" target="_blank" class="pt"><div class="pt-cat">Tratamiento</div><div class="pt-name">Differin Adapalene Gel 0.1%</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dLMa0p" target="_blank" class="pt"><div class="pt-cat">Labios</div><div class="pt-name">Laneige Lip Sleeping Mask</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4arGCpz" target="_blank" class="pt"><div class="pt-cat">Labios</div><div class="pt-name">Summer Fridays Lip Butter Balm</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dWfvnG" target="_blank" class="pt"><div class="pt-cat">Labios</div><div class="pt-name">Aquaphor Lip Repair</div><div class="pt-cta">Amazon</div></a>
+      </div>
+      <p class="sec-sub" style="margin-bottom:6px;">Protector Solar</p>
+      <div class="prod-grid">
+        <a href="https://amzn.to/4uOrnzr" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">EltaMD UV Clear SPF 46</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4ekrrkl" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">La Roche-Posay Anthelios Melt-in Milk SPF 100</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4e3JM42" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">La Roche-Posay Anthelios Tinted Mineral SPF 50</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3RZ4R8f" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">Supergoop Unseen Sunscreen SPF 40</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4uZB6CM" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">Neutrogena Ultra Sheer SPF 70</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4ugdFUR" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">Black Girl Sunscreen SPF 30</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/49Fd3R9" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">CeraVe Hydrating Mineral Sunscreen SPF 50</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/3PEEofF" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">Purito Sun Day Adventure Sunscreen SPF 50</div><div class="pt-cta">Amazon</div></a>
+        <a href="https://amzn.to/4dWmCxP" target="_blank" class="pt"><div class="pt-cat">SPF</div><div class="pt-name">Altruist Sunscreen SPF 50</div><div class="pt-cta">Amazon</div></a>
+      </div>
+    </div>
+    <p style="font-size:10px;color:var(--light);text-align:center;margin-top:28px;line-height:1.7;">Como Asociada de Amazon gano comisiones por las compras que califican.</p>
+  </div>
+</div>
 </div>
 <script>
+function showPTab(id){
+  document.querySelectorAll('.pp-panel').forEach(p=>p.style.display='none');
+  document.getElementById('pp-'+id).style.display='block';
+  document.querySelectorAll('[id^="ptab-"]').forEach(b=>{
+    b.className=b.id==='ptab-'+id?'btn-p':'btn-o';
+    b.style.cssText='font-size:9.5px;padding:8px 14px;white-space:nowrap;';
+  });
+}
+function showSkinTab(id){
+  ['seca','grasa','sensible','mixta'].forEach(s=>{
+    document.getElementById('sp-'+s).style.display=s===id?'block':'none';
+    var b=document.getElementById('stab-'+s);
+    b.className=s===id?'btn-p':'btn-o';
+    b.style.cssText='font-size:9.5px;padding:7px 13px;';
+  });
+}
 const WA="https://wa.me/17862538501?text=Hola%20Adriana!%20Quiero%20agendar%20una%20consulta.";
 const PRODS=[
-  {name:"CeraVe Hydrating Cleanser",url:"https://amzn.to/4t6qMY7",cat:"Limpiador"},
-  {name:"La Roche-Posay Toleriane Hydrating Gentle Cleanser",url:"https://amzn.to/4tO0JWY",cat:"Limpiador"},
-  {name:"La Roche-Posay Effaclar Foaming Gel",url:"https://amzn.to/4vYBySV",cat:"Limpiador"},
-  {name:"Banila Co Clean It Zero Cleansing Balm",url:"https://amzn.to/3QElfui",cat:"Desmaquillante"},
-  {name:"Paula Choice BHA 2%",url:"https://amzn.to/424qbLr",cat:"Exfoliante"},
-  {name:"COSRX AHA BHA Toner",url:"https://amzn.to/4w4lmzC",cat:"Tonico"},
-  {name:"d alba First Spray Serum",url:"https://amzn.to/4w1bzu1",cat:"Serum"},
-  {name:"COSRX Snail Mucin 96%",url:"https://amzn.to/4n4G0eY",cat:"Serum"},
-  {name:"TruSkin Vitamin C Serum",url:"https://amzn.to/3R8hqO2",cat:"Serum"},
-  {name:"AXIS-Y Dark Spot Correcting Glow Serum",url:"https://amzn.to/4tR046X",cat:"Serum"},
-  {name:"Dr. Jart+ Cicapair Tiger Grass Serum",url:"https://amzn.to/4cY4DFq",cat:"Serum"},
-  {name:"SkinCeuticals CE Ferulic",url:"https://amzn.to/4cTUoBX",cat:"Serum"},
-  {name:"CeraVe Retinol Serum",url:"https://amzn.to/4eR9wT9",cat:"Retinol"},
-  {name:"Paula Choice Retinol 1%",url:"https://amzn.to/4t9HGVR",cat:"Retinol"},
-  {name:"Neutrogena Hydro Boost Gel",url:"https://amzn.to/4cW0Wjm",cat:"Hidratante"},
-  {name:"CeraVe PM Moisturizing Lotion",url:"https://amzn.to/48rVDqK",cat:"Hidratante"},
-  {name:"Tatcha The Water Cream",url:"https://amzn.to/3QPUovh",cat:"Hidratante"},
-  {name:"Kiehl Ultra Facial Cream",url:"https://amzn.to/48xeWPh",cat:"Hidratante"},
-  {name:"Olay Regenerist Cream",url:"https://amzn.to/4uh2knK",cat:"Anti-edad"},
-  {name:"Neutrogena Rapid Wrinkle Repair Cream",url:"https://amzn.to/49kAPl9",cat:"Anti-edad"},
-  {name:"CeraVe Skin Renewing Night Cream",url:"https://amzn.to/3OXWJng",cat:"Noche"},
-  {name:"La Roche-Posay Cicaplast Baume B5",url:"https://amzn.to/4t4BVZs",cat:"Tratamiento"},
-  {name:"Aquaphor Healing Ointment",url:"https://amzn.to/4cERO3R",cat:"Tratamiento"},
-  {name:"Laneige Lip Sleeping Mask",url:"https://amzn.to/4t8B1uW",cat:"Labios"},
-  {name:"Summer Fridays Lip Butter Balm",url:"https://amzn.to/4w6Pzhx",cat:"Labios"},
-  {name:"Producto especial Adri",url:"https://amzn.to/4u9Sl3u",cat:"Especial"},
-  {name:"EltaMD UV Clear SPF 46",url:"https://amzn.to/4dGGCTG",cat:"Protector Solar"},
-  {name:"La Roche-Posay Anthelios Melt-in Milk SPF 100",url:"https://amzn.to/4tRjKHc",cat:"Protector Solar"},
-  {name:"Supergoop Unseen Sunscreen SPF 40",url:"https://amzn.to/4v81OJr",cat:"Protector Solar"},
-  {name:"Neutrogena Ultra Sheer SPF 100",url:"https://amzn.to/4f0GsJ0",cat:"Protector Solar"},
-  {name:"Black Girl Sunscreen SPF 30",url:"https://amzn.to/4dn1iRH",cat:"Protector Solar"},
-  {name:"CeraVe Hydrating Mineral Sunscreen SPF 50",url:"https://amzn.to/42JVdsq",cat:"Protector Solar"}
+  {name:"CeraVe Hydrating Cleanser",url:"https://amzn.to/4elsEbd",cat:"Limpiador"},
+  {name:"La Roche-Posay Toleriane Hydrating Gentle Cleanser",url:"https://amzn.to/4fZDRzn",cat:"Limpiador"},
+  {name:"La Roche-Posay Effaclar Foaming Gel",url:"https://amzn.to/4o708NX",cat:"Limpiador"},
+  {name:"Banila Co Clean It Zero Cleansing Balm",url:"https://amzn.to/4fk6ZkL",cat:"Desmaquillante"},
+  {name:"Paula Choice BHA 2%",url:"https://amzn.to/4vkHXGO",cat:"Exfoliante"},
+  {name:"COSRX AHA BHA Toner",url:"https://amzn.to/4fpfvyR",cat:"Tonico"},
+  {name:"d alba First Spray Serum",url:"https://amzn.to/49EELO5",cat:"Serum"},
+  {name:"COSRX Snail Mucin 96%",url:"https://amzn.to/4uPsZbW",cat:"Serum"},
+  {name:"TruSkin Vitamin C Serum",url:"https://amzn.to/3RChSVn",cat:"Serum"},
+  {name:"AXIS-Y Dark Spot Correcting Glow Serum",url:"https://amzn.to/4vpApmb",cat:"Serum"},
+  {name:"Dr. Jart+ Cicapair Tiger Grass Serum",url:"https://amzn.to/4vwbIVs",cat:"Serum"},
+  {name:"SkinCeuticals CE Ferulic",url:"https://amzn.to/43cWpVw",cat:"Serum"},
+  {name:"CeraVe Retinol Serum",url:"https://amzn.to/43L1QLk",cat:"Retinol"},
+  {name:"Paula Choice Retinol 1%",url:"https://amzn.to/4v7gxEV",cat:"Retinol"},
+  {name:"Neutrogena Hydro Boost Gel",url:"https://amzn.to/3Q2Ce9J",cat:"Hidratante"},
+  {name:"CeraVe PM Moisturizing Lotion",url:"https://amzn.to/439hRdZ",cat:"Hidratante"},
+  {name:"Tatcha The Water Cream",url:"https://amzn.to/43d04CK",cat:"Hidratante"},
+  {name:"Kiehl Ultra Facial Cream",url:"https://amzn.to/4uNedT0",cat:"Hidratante"},
+  {name:"Olay Regenerist Cream",url:"https://amzn.to/4o8HEfW",cat:"Anti-edad"},
+  {name:"Neutrogena Rapid Wrinkle Repair Cream",url:"https://amzn.to/4o631yt",cat:"Anti-edad"},
+  {name:"CeraVe Skin Renewing Night Cream",url:"https://amzn.to/4vkQlWO",cat:"Noche"},
+  {name:"La Roche-Posay Cicaplast Baume B5",url:"https://amzn.to/4vrFb2K",cat:"Tratamiento"},
+  {name:"Aquaphor Healing Ointment",url:"https://amzn.to/4vx4PDf",cat:"Tratamiento"},
+  {name:"Laneige Lip Sleeping Mask",url:"https://amzn.to/4dLMa0p",cat:"Labios"},
+  {name:"Summer Fridays Lip Butter Balm",url:"https://amzn.to/4arGCpz",cat:"Labios"},
+  {name:"EltaMD UV Clear SPF 46",url:"https://amzn.to/4uOrnzr",cat:"Protector Solar"},
+  {name:"La Roche-Posay Anthelios Melt-in Milk SPF 100",url:"https://amzn.to/4ekrrkl",cat:"Protector Solar"},
+  {name:"Supergoop Unseen Sunscreen SPF 40",url:"https://amzn.to/3RZ4R8f",cat:"Protector Solar"},
+  {name:"Neutrogena Ultra Sheer SPF 70",url:"https://amzn.to/4uZB6CM",cat:"Protector Solar"},
+  {name:"Black Girl Sunscreen SPF 30",url:"https://amzn.to/4ugdFUR",cat:"Protector Solar"},
+  {name:"CeraVe Hydrating Mineral Sunscreen SPF 50",url:"https://amzn.to/49Fd3R9",cat:"Protector Solar"}
 ];
 const PJ=JSON.stringify(PRODS.map(p=>({name:p.name,url:p.url,category:p.cat})));
 let uName='',chatHist=[],curImg=null,selfieImg=null;
@@ -312,7 +574,7 @@ const load=(k)=>{try{const v=localStorage.getItem('adri_'+k);return v?JSON.parse
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
 function getGreeting(){const h=new Date().getHours();if(h>=5&&h<12)return'Buenos dias, '+uName+'. Hoy es un buen dia para volver a ti.';if(h>=12&&h<18)return'Buenas tardes, '+uName+'. Ya te dedicaste un momento hoy?';return'Buenas noches, '+uName+'. La noche es tuya. Empieza por tu piel.';}
 function startApp(){const n=document.getElementById('name-in').value.trim();if(!n){document.getElementById('name-in').focus();return;}uName=n;save('name',n);document.getElementById('onboarding').style.display='none';document.getElementById('app').style.display='flex';init();}
-function init(){document.getElementById('greeting').textContent=uName;document.getElementById('w-greeting').textContent=getGreeting();const saved=load('chat');if(saved)chatHist=saved;renderProds();}
+function init(){document.getElementById('greeting').textContent=uName;document.getElementById('w-greeting').textContent=getGreeting();const saved=load('chat');if(saved)chatHist=saved;}
 window.addEventListener('DOMContentLoaded',()=>{const n=load('name');if(n){uName=n;document.getElementById('onboarding').style.display='none';document.getElementById('app').style.display='flex';init();}});
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('sc-'+id).classList.add('active');document.getElementById('nb-'+id).classList.add('active');if(id==='rutina')renderRutina();if(id==='historial')renderHistorial();}
 function sys(){return'Eres Adri, asesora experta en skincare de Adriana Beauty Studios, esthetician certificada con mas de 10 anos en Miami. Formas parte de Volver a Ti de Adriana Beauty Studios.\nLa clienta se llama '+uName+'. Llamala SIEMPRE por su nombre. NUNCA uses hermosa, amor, guapa, bonita. Trato profesional, calido y elegante. Sin emojis.\nCATALOGO, recomienda SIEMPRE estos primero: '+PJ+'\nIMPORTANTE: En la rutina de la MANANA siempre incluye un protector solar como ULTIMO paso. Elige el mas adecuado segun el tipo de piel de la clienta entre los protectores solares del catalogo.\nCuando menciones un producto de la rutina, incluye su link de Amazon en este formato: [nombre del producto](url). Esto aplica tanto en la rutina AM como PM.\nIncluye: 1)Analisis 2)Diagnostico 3)Rutina AM y PM con links clickeables 4)Guia de uso 5)Combinaciones.\nAl final: PRODUCT_CARDS:[{"name":"nombre","url":"url","reason":"razon"}] max 5.\nSi generas rutina completa incluye: SAVE_RUTINA:[texto completo]\nCierra: "'+uName+', quieres resultados mas profundos? Reserva tu consulta 1:1 conmigo, precio de lanzamiento $17 para las primeras 10 clientas."\nEspanol. Elegante. Concisa.';}
@@ -332,7 +594,6 @@ function renderRutina(){const r=load('cur-rutina'),el=document.getElementById('r
 function renderHistorial(){const rs=load('rutinas')||[],el=document.getElementById('hist-content');if(!rs.length){el.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg><p class="empty-text">Aqui apareceran tus rutinas anteriores, '+uName+'.</p><button class="btn-p" onclick="show(\'chat\')">Crear mi primera rutina</button></div>';return;}el.innerHTML=rs.map((r,i)=>'<div class="rut-card"><div class="rut-card-title">'+(i===0?'Rutina actual':'Rutina #'+(rs.length-i))+'</div><div class="rut-card-date">'+r.date+'</div><div class="rut-card-preview">'+esc(r.text.substring(0,120))+'...</div><div class="rut-card-actions"><button class="btn-o" onclick="viewHist('+i+')" style="font-size:10px;padding:8px 14px">Ver completa</button><button class="btn-o" onclick="useHist('+i+')" style="font-size:10px;padding:8px 14px">Usar esta</button></div></div>').join('');}
 function viewHist(i){const rs=load('rutinas')||[];if(!rs[i])return;document.getElementById('hist-content').innerHTML='<button class="btn-o" onclick="renderHistorial()" style="margin-bottom:14px;font-size:10px;padding:8px 14px">Volver</button><div class="rut-content">'+fmt(rs[i].text)+'<div class="vat-tag">Este es tu momento. Volver a Ti empieza aqui.</div></div>';}
 function useHist(i){const rs=load('rutinas')||[];if(!rs[i])return;save('cur-rutina',rs[i].text);toast('Rutina activada');show('rutina');}
-function renderProds(){document.getElementById('prod-grid').innerHTML=PRODS.map(p=>'<a href="'+p.url+'" target="_blank" rel="noreferrer" class="pt"><div class="pt-cat">'+p.cat+'</div><div class="pt-name">'+p.name+'</div><div class="pt-cta">Ver en Amazon</div></a>').join('');}
 function addUserBubble(text,img){const c=document.getElementById('chat-msgs'),row=document.createElement('div');row.className='msg-row user';let h='';if(img)h+='<img src="'+img.src+'" class="msg-img" style="max-width:180px"/>';if(text)h+='<span>'+esc(text)+'</span>';row.innerHTML='<div class="b-user">'+h+'</div>';c.appendChild(row);}
 function addAdriBubble(text,cards,rutina){
   const c=document.getElementById('chat-msgs');
