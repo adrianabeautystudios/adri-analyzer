@@ -6,9 +6,19 @@
 <title>Mis Recomendados · Adriana Beauty Studios</title>
   <base target="_blank">
   <script>
+    // Break out of any iframe (Linktree, etc)
     if (window.top !== window.self) {
       window.top.location.href = window.self.location.href;
     }
+    // Force all Amazon links to open in new tab on mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('a[href*="amzn"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.open(this.href, '_blank');
+        });
+      });
+    });
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
