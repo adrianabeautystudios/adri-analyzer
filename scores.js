@@ -1,4 +1,4 @@
-/* /* Adri - barras de puntaje de piel (se carga despues del script principal de index.html) */
+/* Adri - barras de puntaje de piel (se carga despues del script principal de index.html) */
 (function () {
   var METRICS = [
     ['hidratacion', 'Hidratación'],
@@ -30,6 +30,26 @@
       '\nSi la clienta envio una foto, agrega al final de tu respuesta una linea exacta con este formato (enteros 0 a 100, mayor es mejor, estimacion visual orientativa):\n' +
       'SKIN_SCORES:{"hidratacion":0,"textura":0,"lineas":0,"poros":0,"firmeza":0,"tono":0,"manchas":0}\n' +
       'Reemplaza los ceros por tu estimacion. Si NO hay foto, no incluyas SKIN_SCORES.';
+  };
+
+  // 1b) Recordatorio dentro del mensaje con foto, para que la IA no omita los puntajes
+  var _api = api;
+  api = function (msgs) {
+    try {
+      var last = msgs[msgs.length - 1];
+      if (last && last.role === 'user' && Array.isArray(last.content) &&
+          last.content.some(function (b) { return b && b.type === 'image'; })) {
+        var copy = msgs.slice(0, -1).concat([{
+          role: 'user',
+          content: last.content.concat([{
+            type: 'text',
+            text: 'Recuerda: termina tu respuesta con la linea SKIN_SCORES con tus 7 puntajes de 0 a 100 para esta foto.'
+          }])
+        }]);
+        return _api(copy);
+      }
+    } catch (e) {}
+    return _api(msgs);
   };
 
   // 2) Extraer los puntajes de la respuesta
