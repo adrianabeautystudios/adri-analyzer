@@ -1,4 +1,4 @@
-/* Adri - barras de puntaje de piel (se carga despues del script principal de index.html) */
+/* /* Adri - barras de puntaje de piel (se carga despues del script principal de index.html) */
 (function () {
   var METRICS = [
     ['hidratacion', 'Hidratación'],
@@ -52,6 +52,7 @@
     _addAdriBubble(text, cards, rutina);
     var scores = window.__adriScores;
     window.__adriScores = null;
+    addSendButton(c, text, scores);
     if (!scores) return;
     var rows = '';
     var found = 0;
@@ -76,4 +77,63 @@
     }, 60);
     if (typeof scrollBot === 'function') scrollBot();
   };
+
+  // 5) Boton "Enviar mi analisis a Adriana" por WhatsApp (te llega nombre y numero)
+  function getPhone() {
+    try { return localStorage.getItem('adri_phone') || ''; } catch (e) { return ''; }
+  }
+  function addSendButton(c, text, scores) {
+    if (!text || /^Error de conexion/i.test(text)) return;
+    var wa = c.querySelector('.wa-wrap:last-of-type') || c.lastElementChild;
+    var flex = wa && wa.querySelector ? wa.querySelector('div') : null;
+    if (!flex) return;
+    var summary = '';
+    if (scores) {
+      var parts = [];
+      METRICS.forEach(function (m) {
+        var v = parseInt(scores[m[0]], 10);
+        if (!isNaN(v)) parts.push(m[1] + ' ' + v);
+      });
+      if (parts.length) summary = '\nMis puntajes: ' + parts.join(', ');
+    }
+    var phone = getPhone();
+    var msg = 'Hola Adriana! Soy ' + (typeof uName !== 'undefined' ? uName : '') +
+      (phone ? '\nMi WhatsApp: ' + phone : '') +
+      '\nAcabo de hacer mi análisis en Adri y quiero mi rutina personalizada.' + summary;
+    var a = document.createElement('a');
+    a.href = 'https://wa.me/17862538501?text=' + encodeURIComponent(msg);
+    a.target = '_blank';
+    a.className = 'wa-cta';
+    a.textContent = 'Enviar mi análisis a Adriana';
+    a.style.marginTop = '8px';
+    flex.appendChild(a);
+  }
+
+  // 6) Pedir WhatsApp en la pantalla de inicio (opcional)
+  var nameIn = document.getElementById('name-in');
+  if (nameIn && !document.getElementById('wa-in')) {
+    var wi = document.createElement('input');
+    wi.className = 'ob-input';
+    wi.id = 'wa-in';
+    wi.type = 'tel';
+    wi.maxLength = 20;
+    wi.placeholder = 'Tu WhatsApp (opcional)';
+    wi.setAttribute('onkeydown', "if(event.key==='Enter')startApp()");
+    nameIn.insertAdjacentElement('afterend', wi);
+  }
+  var _startApp = startApp;
+  startApp = function () {
+    var w = document.getElementById('wa-in');
+    var n = document.getElementById('name-in');
+    if (w && n && n.value.trim()) {
+      try { localStorage.setItem('adri_phone', w.value.trim()); } catch (e) {}
+    }
+    return _startApp();
+  };
+
+  // 4) Aviso de privacidad exacto
+  var pt = document.querySelector('#sc-selfie .privacy-text');
+  if (pt) {
+    pt.innerHTML = '<strong>Tu foto se usa solo para tu análisis.</strong> Se envía a la inteligencia artificial que genera tu análisis y no se comparte con nadie más. Tu historial y tus rutinas se guardan únicamente en este dispositivo.';
+  }
 })();
